@@ -265,7 +265,7 @@ export default function Home() {
           {/* Robot + names */}
           <div className="robot-stage">
             <div className="robot-wrapper">
-              <Image src="/orbatron.png" alt="Orbatron" width={300} height={300} />
+              <Image src="/orbatron.png" alt="orbatron" width={300} height={300} />
             </div>
             <div className="robot-name">Orbatron</div>
             <div className="robot-name">AI Agent</div>
