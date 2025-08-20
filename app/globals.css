@@ -1,0 +1,358 @@
+
+/* ===== Theme ===== */
+:root{
+  --page-bg: #32d0d5;
+  --fg: #0e0d01;
+  --brand: #e98c13;
+
+  /* Bars (same size) */
+  --bar-h: 60px;
+  --bar-bg: #d4222a;
+  --bar-stroke: #2ee43a;
+
+  /* Contract chip */
+  --chip-bg: rgba(0,0,0,.35);
+  --chip-stroke: rgba(233,140,19,.55);
+  --chip-glow: 0 0 10px rgba(233,140,19,.35);
+
+  /* Ticker */
+  --ticker-speed: 28s;
+  --ticker-fg: #fff;
+  --ticker-shadow: 0 0 8px rgba(0,0,0,.45), 0 0 16px rgba(0,0,0,.35);
+}
+
+/* ===== Base ===== */
+*{ box-sizing:border-box; }
+html, body{ height:100%; margin:0; }
+body{
+  background: var(--page-bg);
+  color: var(--fg);
+  font-family: ui-monospace, Menlo, Consolas, "Courier New", monospace;
+  overflow-x: hidden;
+}
+
+/* Top bar centered layout */
+.topbar{
+  position: fixed; inset: 0 0 auto 0; height: var(--bar-h);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;   /* left | center | right */
+  align-items: center;
+  padding: 0 16px; z-index: 10;
+  background: var(--bar-bg);
+  border-bottom: 2px solid var(--bar-stroke);
+}
+.topbar-left{ display:flex; gap:12px; align-items:center; }
+.topbar-center{ display:flex; justify-content:center; }
+.topbar-right{ display:flex; gap:16px; align-items:center; justify-content:flex-end; }
+
+.network, .navlink{ color:#fff; opacity:.9; text-decoration:none; }
+
+/* Whitepaper button look */
+.wp-btn{
+  background: #fff;
+  color: #0b0905;
+  font-weight: 800;
+  letter-spacing: .02em;
+  border: none;
+  border-radius: 999px;
+  padding: 8px 14px;
+  cursor: pointer;
+  box-shadow: 0 0 12px rgba(0,0,0,.15);
+  transition: transform .08s ease, filter .15s ease;
+}
+.wp-btn:hover{ transform: translateY(-1px); filter: brightness(1.03); }
+
+/* (keep your existing .logo-wrapper and .token-label rules) */
+
+
+/* logo in topbar */
+.logo-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.token-label {
+  font-weight: 800;
+  font-size: 0.85rem;
+  color: #fff;
+  letter-spacing: .03em;
+}
+
+.social-icon {
+  width: 45px;
+  height: 45px;
+  display: inline-block;
+  background-size: cover;
+  background-position: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.social-icon:hover {
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.9),
+              0 0 24px rgba(255, 0, 255, 0.7);
+  transform: scale(1.1);
+}
+
+/* Placeholder icons */
+.social-icon.x        { background-image: url('/icons/x.png'); }
+.social-icon.discord  { background-image: url('/icons/discord.png'); }
+.social-icon.instagram{ background-image: url('/icons/instagram.png'); }
+.social-icon.tiktok   { background-image: url('/icons/tiktok.jpg'); }
+.social-icon.bluesky  { background-image: url('/icons/bluesky.png'); }
+.social-icon.telegram { background-image: url('/icons/telegram.png'); }
+
+
+/* === SOCIAL ICONS === */
+.social-icons {
+  display: flex;
+  gap: 40px; /* space between icons */
+justify-content: center;
+align-items: center;
+margin-top: 20px;
+}
+
+.social-icons a {
+  display: inline-block;
+  transition: transform 0.2s ease, filter 0.2s ease;
+}
+
+.social-icons img.social-icon {
+  width: 32px;   /* size of the icons */
+  height: 32px;
+  object-fit: contain;
+}
+
+.social-icons a:hover {
+  transform: scale(1.1); /* slight zoom on hover */
+  filter: brightness(1.2);
+}
+
+
+/* ===== Contract chip (under top bar) ===== */
+.contract-chip{
+  position: fixed; top: calc(var(--bar-h) + 8px); left:50%; transform: translateX(-50%);
+  z-index: 11; display:grid; grid-auto-flow:column; align-items:center; gap:10px;
+  padding:8px 12px; border-radius:999px; background:var(--chip-bg);
+  border:1px solid var(--chip-stroke); box-shadow:var(--chip-glow);
+  color:#fff; cursor:pointer; user-select:none;
+}
+.contract-chip .chip-label{ opacity:.8; font-size:.9rem; }
+.contract-chip .chip-hash{ font-weight:600; letter-spacing:.02em; }
+.contract-chip .chip-copy{ color:var(--brand); font-weight:700; }
+
+/* ===== Page layout (everything between the bars) ===== */
+.page{
+  position: relative; /* needed for absolute children */
+  min-height: calc(100vh - var(--bar-h) - var(--bar-h));
+  padding: calc(var(--bar-h) + 211px) 24px calc(var(--bar-h) + 120px);
+  display:flex; justify-content:flex-start; align-items:center;
+}
+
+.content{
+  width: 100%;
+  max-width: 1000px;
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+  margin: 0 auto;
+}
+/* --- Small orange Uniswap dot --- */
+.uniswap-dot{
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--brand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 12px auto 8px;  /* centered under END TRANSMISSION */
+  box-shadow: 0 0 12px rgba(0,0,0,.25), 0 0 12px rgba(233,140,19,.45);
+  text-decoration: none;
+  transition: transform .08s ease, filter .15s ease;
+}
+.uniswap-dot:hover{ transform: translateY(-1px); filter: brightness(1.05); }
+.uniswap-dot img{ width: 28px; height: 28px; display:block; }
+
+/* --- Keep AI Agent "old way" (two .robot-name lines, tighter spacing) --- */
+.robot-name{ margin: 0 0 2px; }       /* tighten gap between the two lines */
+
+/* --- Ensure page can anchor absolute children (top-right coin) --- */
+.page{ position: relative; }
+
+/* --- Top-right coin block if not already present --- */
+.blue-coin-topright {
+  position: absolute;
+  top: 75px;
+  right: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 5;
+}
+.blue-coin-topright .token-label{
+  font-weight: 800;
+  font-size: 1rem;
+  color: var(--fg);
+  letter-spacing: .03em;
+}
+
+
+/* ===== Robot block ===== */
+.robot-wrapper{
+  display:flex; justify-content:center;
+  margin-top: 0;
+}
+
+.robot-id{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.robot-name{
+  position: relative;
+  top: -35px; /* raise closer to robot */
+  text-align: center;
+  font-weight: 800;
+  letter-spacing: .02em;
+  font-size: 1.4rem;
+  margin: 0 0 2px;
+}
+.robot-subtitle{
+  margin: 0;
+  font-weight: 700;
+}
+/* --- Robot stack & floor --- */
+/* Stage centers things */
+.robot-stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  margin-top: 30px;
+}
+
+/* ===== Transmission ===== */
+.transmission{ max-width: 900px; margin: 0 auto; text-align: center; padding: 0 8px; }
+
+.intro-static{
+  font-size: 2rem;
+  margin: 0 0 16px 0;
+  text-shadow: 0 0 8px var(--brand), 0 0 16px #e96412;
+}
+.tw{
+  font-size: 1.75rem;
+  line-height: 1.45;
+  text-shadow: 0 0 8px #df6a0a, 0 0 16px #ee8712;
+  white-space: pre-wrap; word-break: break-word;
+}
+.tw-1{ margin-top: 10px; }
+.tw-2{ margin-top: 18px; }
+.caret{ display:inline-block; margin-left:4px; animation: cursorBlink 1s steps(1) infinite; }
+@keyframes cursorBlink { 50% { opacity: 0; } }
+
+/* END transmission */
+.end{
+  font-size: 1.9rem;
+  margin-top: 28px;
+}
+
+/* ===== Bottom bar + ticker (fixed) ===== */
+.bottombar{
+  position: fixed; inset: auto 0 0 0; height: var(--bar-h);
+  overflow:hidden; background: var(--bar-bg); border-top: 2px solid var(--bar-stroke);
+  z-index: 10; display:block;
+}
+.ticker-track{
+  display:inline-block; white-space:nowrap; will-change:transform;
+  padding-left:100%; line-height: var(--bar-h);
+  animation: tickerScroll var(--ticker-speed) linear infinite;
+}
+.ticker-item{
+  display:inline-block; padding:0 2rem; color: var(--ticker-fg); text-shadow: var(--ticker-shadow);
+  font: 600 14px ui-monospace, Menlo, monospace; letter-spacing:.04em;
+}
+@keyframes tickerScroll { to { transform: translateX(-100%); } }
+@media (prefers-reduced-motion: reduce){ .ticker-track{ animation:none; } }
+
+/* ===== CTA (kept styles in case you re-add later) ===== */
+.cta-row{
+  margin-top: 22px;
+  display: flex;
+  justify-content: center;
+}
+.cta{
+  display: inline-block;
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-weight: 800;
+  letter-spacing: .02em;
+  text-decoration: none;
+  transition: transform .08s ease, filter .15s ease;
+}
+.cta-primary{
+  background: var(--brand);
+  color: #0b0905;
+  box-shadow: 0 0 16px rgba(233,140,19,.45);
+}
+.cta-primary:hover{
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+
+/* ===== Modal ===== */
+.wp-modal{
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.45);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1000;
+}
+.wp-card{
+  width: min(720px, 92vw);
+  max-height: 78vh;
+  background: #111; color: #fff;
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 12px;
+  box-shadow: 0 12px 40px rgba(0,0,0,.5);
+  overflow: hidden;
+}
+.wp-head{
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 14px 16px; border-bottom: 1px solid rgba(255,255,255,.12);
+}
+.wp-close{
+  background: none; border: none; color: #fff; font-size: 22px; line-height: 1;
+  cursor: pointer; padding: 4px 8px;
+}
+.wp-body{
+  padding: 16px 18px;
+  overflow: auto;
+}
+
+/* ===== Small screens ===== */
+@media (max-width: 700px){
+  .page{ padding: calc(var(--bar-h) + 220px) 16px calc(var(--bar-h) + 100px); }
+  .robot-wrapper img{ width: 240px; height: auto; }
+  .intro-static{ font-size: 1.6rem; }
+  .tw{ font-size: 1.35rem; }
+  .end{ font-size: 1.6rem; }
+  .robot-name{ top: -28px; font-size: 1.2rem; }
+  .blue-coin-topright{ top: 60px; right: 16px; }
+}
+
+.robot-stage {
+  position: relative;
+  width: 100%;
+  display: grid;
+  place-items: center;
+  margin-top: 24px;
+}
+
+
+
+
+
+
+
