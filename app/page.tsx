@@ -8,6 +8,11 @@ import Image from 'next/image';
 const MP3 = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/keyboard-typing.mp3`;
 
 const OTRON_CONTRACT = '0xYourTokenContractAddressHere';
+// Uniswap buy link (turns “on” the moment you paste the real address)
+const UNI_BUY =
+  OTRON_CONTRACT && OTRON_CONTRACT.startsWith("0x")
+    ? `https://app.uniswap.org/swap?outputCurrency=${OTRON_CONTRACT}&chain=ethereum`
+    : ""; // empty = not live yet
 
 export default function Home() {
   // typing states
@@ -321,11 +326,14 @@ export default function Home() {
       >
         <a
           className="cta cta-primary"
-          href={`https://app.uniswap.org/swap?inputCurrency=ETH&outputCurrency=${OTRON_CONTRACT}&chain=mainnet`}
+         href={UNI_BUY || "#"}
+onClick={(e) => { if (!UNI_BUY) e.preventDefault(); }}
+ 
           target="_blank"
           rel="noopener noreferrer"
         >
-          Buy $OTRON on Uniswap
+          {UNI_BUY ? "Buy $OTRON on Uniswap" : "Buy opens at launch"}
+
         </a>
       </div>
 
@@ -383,6 +391,19 @@ export default function Home() {
           </div>
         </div>
       )}
+   {/* Sticky buy bar (mobile-only; shows when token is live) */}
+<div className="buy-bar">
+  <a
+    className="btn primary"
+    href={UNI_BUY || "#"}
+    onClick={(e) => { if (!UNI_BUY) e.preventDefault(); }}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    {UNI_BUY ? "Buy $OTRON" : "Buy opens at launch"}
+  </a>
+</div>
+
     </>
   );
 }
