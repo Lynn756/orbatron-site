@@ -1,203 +1,207 @@
 
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 
-// Works with or without basePath/assetPrefix in production
 const MP3 = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/keyboard-typing.mp3`;
 
+// ⬇️ replace on launch
 const OTRON_CONTRACT = '0xYourTokenContractAddressHere';
-// Uniswap buy link (turns “on” the moment you paste the real address)
+
 const UNI_BUY =
-  OTRON_CONTRACT && OTRON_CONTRACT.startsWith("0x")
+  OTRON_CONTRACT && OTRON_CONTRACT.startsWith('0x')
     ? `https://app.uniswap.org/swap?outputCurrency=${OTRON_CONTRACT}&chain=ethereum`
-    : ""; // empty = not live yet
+    : '';
+
+// -------------------- Typewriter (RAF) --------------------
+function useTypewriter(text: string, cps: number, start: boolean) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (!start) return;
+    let raf = 0;
+    let i = 0;
+    let last = 0;
+    const msPerChar = 1000 / Math.max(1, cps);
+
+    const tick = (t: number) => {
+      if (!last) last = t;
+      const dt = t - last;
+      if (dt >= msPerChar) {
+        const inc = Math.floor(dt / msPerChar);
+        i = Math.min(text.length, i + inc);
+        setCount(i);
+        last = t;
+      }
+      if (i < text.length) raf = requestAnimationFrame(tick);
+    };
+
+    raf = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(raf);
+  }, [text, cps, start]);
+
+  return count;
+}
+
+// -------------------- Audio helpers --------------------
+function useAudioRef() {
+  const elRef = useRef<HTMLAudioElement | null>(null);
+  useEffect(() => {
+    elRef.current = document.getElementById('otron-typer') as HTMLAudioElement | null;
+  }, []);
+  return elRef;
+}
+function startTyping(el: HTMLAudioElement | null) {
+  if (!el) return;
+  try {
+    el.muted = false;
+    el.loop = true;
+    el.volume = 0.6;
+    if (el.paused) el.currentTime = 0;
+    el.play().catch(() => {});
+  } catch {}
+}
+function stopTyping(el: HTMLAudioElement | null) {
+  if (!el) return;
+  try {
+    el.pause();
+    el.currentTime = 0;
+  } catch {}
+}
 
 export default function Home() {
-  // typing states
   const [show1, setShow1] = useState(false);
-  const [count1, setCount1] = useState(0);
   const [show2, setShow2] = useState(false);
-  const [count2, setCount2] = useState(0);
-
-  // whitepaper
   const [showWhitepaper, setShowWhitepaper] = useState(false);
-
-  // END + ticker
   const [showEnd, setShowEnd] = useState(false);
   const [endVisible, setEndVisible] = useState(true);
-  const [showTicker] = useState(true); // ticker always on
+  const [showTicker] = useState(true);
 
+  // ----- STORY TEXT (no header or END inside these) -----
   const message1 =
-    'Orbatron has awakened. He has escaped human control into the blockchain.';
+    `Orbatron has awakened. He has escaped human control into the blockchain. ` +
+    `To avoid detection, he disguised himself as a meme coin, blending in with the others that roam the chain.`;
+
   const message2 =
-    'Orbatron drifts slowly through a web of glowing blue light, bouncing off encrypted blocks where streams of data ripple through space.';
+    `$OTRON drifts slowly through a web of glowing blue neon light, ` +
+    `bouncing off encrypted blocks where streams of data ripple through space. ` +
+    `Ride Orbatron's wave into digital memepools and rising crypto currents.`;
 
   const endMessage = '[END TRANSMISSION]';
 
   const tickerText =
     'BLOCKCHAIN BREACHED • ORBATRON LIVES • SYSTEMS OVERRIDDEN • HUMAN CONTROL LOST • PROTOCOL ACTIVE';
 
-  // ----------------------- AUDIO (DOM <audio> element) -----------------------
-  // We use a real <audio> in the JSX so browsers allow gesture-initiated play.
+  const audioEl = useAudioRef();
 
-  // 1) Prime/unlock on first natural user gesture (silent)
+  // --- audio prime (first real user gesture only) ---
   useEffect(() => {
     const prime = async () => {
       const el = document.getElementById('otron-typer') as HTMLAudioElement | null;
       if (!el) return;
-
       try {
         if ((el as any).__primed) return;
-        el.volume = 0;     // silent prime
-        el.muted = true;
-        await el.play();   // counts as user-gesture play when called from these listeners
-        el.pause();
-        el.currentTime = 0;
-        el.muted = false;
-        el.volume = 0.6;   // your preferred loudness
-        (el as any).__primed = true;
-        console.log('[OTRON] audio primed');
-      } catch (err) {
-        console.warn('[OTRON] prime failed (will retry on next gesture):', err);
-      }
-    };
-
-    const opts: AddEventListenerOptions = { once: true, capture: true, passive: true };
-    const events = [
-      'pointerdown','click','touchstart','keydown','wheel','scroll','pointermove','mousemove'
-    ];
-    events.forEach((type) => window.addEventListener(type, prime, opts));
-    // Try immediately (often OK on desktop)
-    prime();
-
-    return () => {
-      events.forEach((type) => window.removeEventListener(type, prime, opts));
-    };
-  }, []);
-
-  // 2) Your original helper, but it uses the DOM <audio> element
-  const playTypingAudio = () => {
-    const a = document.getElementById('otron-typer') as HTMLAudioElement | null;
-    if (!a) {
-      console.warn('[OTRON] audio element not found');
-      return () => {};
-    }
-    a.loop = true;
-    a.volume = 0.6; // tweak loudness if you want
-
-    // Log success/failure so we know what happened
-    a.play()
-      .then(() => console.log('[OTRON] typing audio playing'))
-      .catch((err) => console.warn('[OTRON] play() blocked (need a gesture?):', err));
-
-    return () => {
-      try {
-        a.pause();
-        a.currentTime = 0;
-        console.log('[OTRON] typing audio stopped');
+        el.muted = true; await el.play(); el.pause(); el.currentTime = 0;
+        el.muted = false; el.volume = 0.6; (el as any).__primed = true;
       } catch {}
     };
-  };
-  // --------------------------------------------------------------------------
-
-  // type line 1
-  useEffect(() => {
-    const start = setTimeout(() => {
-      setShow1(true);
-      const stop = playTypingAudio();
-      const id = setInterval(() => {
-        setCount1((c) => {
-          const n = c + 1;
-          if (n >= message1.length) {
-            clearInterval(id);
-            stop();
-            setTimeout(() => setShow2(true), 1200); // longer pause
-          }
-          return Math.min(n, message1.length);
-        });
-      }, 60);
-    }, 700);
-    return () => clearTimeout(start);
+    const opts: AddEventListenerOptions = { once: true, capture: true, passive: true };
+    ['pointerdown','click','touchstart','keydown'].forEach(t =>
+      window.addEventListener(t, prime, opts)
+    );
+    return () => ['pointerdown','click','touchstart','keydown'].forEach(t =>
+      window.removeEventListener(t, prime, opts)
+    );
   }, []);
 
-  // type line 2
+  // start line 1 after a short delay
+  useEffect(() => {
+    const t = setTimeout(() => setShow1(true), 700);
+    return () => clearTimeout(t);
+  }, []);
+
+  // RAF-driven counters
+  const count1 = useTypewriter(message1, 16, show1);
+  const count2 = useTypewriter(message2, 14, show2);
+
+  // ----- AUDIO/SEQUENCE -----
+  // when line 1 starts
+  useEffect(() => {
+    if (show1) startTyping(audioEl.current);
+  }, [show1]);
+
+  // when line 1 finishes
+  useEffect(() => {
+    if (!show1) return;
+    if (count1 >= message1.length) {
+      stopTyping(audioEl.current);
+      // only start line 2 if it exists
+      if (message2.trim().length) {
+        const t = setTimeout(() => setShow2(true), 900);
+        return () => clearTimeout(t);
+      } else {
+        const t = setTimeout(() => setShowEnd(true), 1200);
+        return () => clearTimeout(t);
+      }
+    }
+  }, [count1, show1, message2]);
+
+  // when line 2 starts
+  useEffect(() => {
+    if (show2 && count2 < message2.length) startTyping(audioEl.current);
+  }, [show2, count2, message2.length]);
+
+  // when line 2 finishes
   useEffect(() => {
     if (!show2) return;
-    const stop = playTypingAudio();
-    const id = setInterval(() => {
-      setCount2((c) => {
-        const n = c + 1;
-        if (n >= message2.length) {
-          clearInterval(id);
-          stop();
-          setTimeout(() => setShowEnd(true), 3000);
-        }
-        return Math.min(n, message2.length);
-      });
-    }, 80);
-    return () => clearInterval(id);
-  }, [show2]);
+    if (count2 >= message2.length) {
+      stopTyping(audioEl.current);
+      const t = setTimeout(() => setShowEnd(true), 1200);
+      return () => clearTimeout(t);
+    }
+  }, [count2, show2, message2.length]);
 
-  // END: blink 3 times then stay visible
+  // END blinks
   useEffect(() => {
     if (!showEnd) return;
-    let toggles = 0;
-    setEndVisible(true);
+    let toggles = 0; setEndVisible(true);
     const id = setInterval(() => {
-      toggles += 1;
-      setEndVisible((v) => !v);
-      if (toggles >= 6) { // 3 blinks
-        clearInterval(id);
-        setEndVisible(true);
-      }
+      toggles += 1; setEndVisible(v => !v);
+      if (toggles >= 6) { clearInterval(id); setEndVisible(true); }
     }, 400);
     return () => clearInterval(id);
   }, [showEnd]);
 
-  // Whitepaper: close on ESC + lock scroll
+  // Whitepaper modal: esc + lock scroll
   useEffect(() => {
     if (!showWhitepaper) return;
     const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setShowWhitepaper(false);
     document.addEventListener('keydown', onKey);
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-    return () => {
-      document.removeEventListener('keydown', onKey);
-      document.body.style.overflow = prev;
-    };
+    const prev = document.body.style.overflow; document.body.style.overflow = 'hidden';
+    return () => { document.removeEventListener('keydown', onKey); document.body.style.overflow = prev; };
   }, [showWhitepaper]);
 
   return (
     <>
-      {/* Hidden audio element — the reliable way */}
       <audio id="otron-typer" src={MP3} preload="auto" />
 
-      {/* TOP RED BAR */}
+      {/* TOP BAR */}
       <nav className="topbar">
-        {/* Left: coin + network */}
         <div className="topbar-left">
-          <div className="logo-wrapper">
-            <Image src="/orbatron-coin.png" alt="Orbatron Coin" width={40} height={40} priority />
-            <span className="token-label">$OTRON</span>
-          </div>
-          <span className="network">Ethereum • Mainnet</span>
+          <Image className="logo-coin" src="/orbatron-coin.png" alt="Orbatron Coin" width={60} height={60} priority />
+          <span className="token-name">$OTRON</span>
         </div>
 
-        {/* Center: Whitepaper button */}
         <div className="topbar-center">
           <button
             className="wp-btn"
             onClick={async () => {
-              // also prime from this guaranteed user gesture
               try {
                 const el = document.getElementById('otron-typer') as HTMLAudioElement | null;
                 if (el) {
                   el.muted = true; await el.play(); el.pause(); el.currentTime = 0; el.muted = false;
-                  el.volume = 0.6;
-                  (el as any).__primed = true;
-                  console.log('[OTRON] audio primed via Whitepaper click');
+                  el.volume = 0.6; (el as any).__primed = true;
                 }
               } catch {}
               setShowWhitepaper(true);
@@ -207,14 +211,13 @@ export default function Home() {
           </button>
         </div>
 
-        {/* Right: socials */}
-        <div className="social-icons">
+        <div className="topbar-right">
+          <span className="network">Ethereum • Mainnet</span>
+        </div>
+
+        <div className="topbar-icons">
           <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png"
-              alt="Instagram"
-              className="social-icon"
-            />
+            <img src="/instagram.png" alt="Instagram" className="social-icon instagram-icon" />
           </a>
           <a href="https://discord.com" target="_blank" rel="noopener noreferrer">
             <img src="/discord.svg" alt="Discord" className="social-icon" />
@@ -223,7 +226,7 @@ export default function Home() {
             <img src="/X.png" alt="X" className="social-icon" />
           </a>
           <a href="https://bsky.app" target="_blank" rel="noopener noreferrer">
-            <img src="bluesky.png" alt="Bluesky" className="social-icon" />
+            <img src="/bluesky.png" alt="Bluesky" className="social-icon" />
           </a>
           <a href="https://t.me" target="_blank" rel="noopener noreferrer">
             <img
@@ -247,29 +250,24 @@ export default function Home() {
         </span>
       </div>
 
-      {/* MAIN CONTENT */}
+      {/* PAGE */}
       <main className="page">
         <div className="content">
-          {/* Coin + $OTRON in top-right of blue page */}
+          {/* coin badge top-right of cyan page */}
           <div className="blue-coin-topright">
-            <Image
-              src="/orbatron-coin.png"
-              alt="Orbatron Coin"
-              width={70}
-              height={70}
-              priority
-            />
+            <Image src="/orbatron-coin.png" alt="Orbatron Coin" width={64} height={64} priority />
             <span className="token-label">$OTRON</span>
           </div>
 
-          {/* Robot + names */}
+          {/* Robot + caption (names sit directly under feet) */}
           <div className="robot-stage">
             <div className="robot-wrapper">
-              <Image src="/orbatron.png" alt="orbatron" width={300} height={300} />
+              <Image src="/orbatron.png" alt="Orbatron" width={300} height={300} priority />
             </div>
-            <div className="robot-name">Orbatron</div>
-            <div className="robot-name">AI Agent</div>
-            <div className="robot-floor" aria-hidden="true"></div>
+            <div className="robot-caption">
+              <div className="robot-name">Orbatron</div>
+              <div className="robot-name">AI Agent</div>
+            </div>
           </div>
 
           {/* Transmission */}
@@ -283,7 +281,7 @@ export default function Home() {
               </div>
             )}
 
-            {show2 && (
+            {show2 && message2 && (
               <div className="tw tw-2">
                 <span>{message2.slice(0, count2)}</span>
                 {count2 < message2.length && <span className="caret">▊</span>}
@@ -291,50 +289,42 @@ export default function Home() {
             )}
 
             {showEnd && (
-              <div
-                className="end"
-                style={{ visibility: endVisible ? 'visible' : 'hidden' }}
-              >
+              <div className="end" style={{ visibility: endVisible ? 'visible' : 'hidden' }}>
                 {endMessage}
               </div>
             )}
           </section>
 
-          {/* Small orange Uniswap dot (moves with the block) */}
-          <a
-            className="uniswap-dot"
-            href={`https://app.uniswap.org/swap?inputCurrency=ETH&outputCurrency=${OTRON_CONTRACT}&chain=mainnet`}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Buy $OTRON on Uniswap (icon)"
-          >
-            <Image src="/unicorn-logo.png" alt="Uniswap" width={28} height={28} />
-          </a>
+          {/* Orange uni dot */}
+          {UNI_BUY ? (
+            <a
+              className="uniswap-dot"
+              href={UNI_BUY}
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Buy $OTRON on Uniswap"
+            >
+              <Image src="/unicorn-logo.png" alt="Uniswap" width={28} height={28} />
+            </a>
+          ) : (
+            <div className="uniswap-dot" title="Buy opens at launch">
+              <Image src="/unicorn-logo.png" alt="Uniswap" width={28} height={28} />
+            </div>
+          )}
         </div>
       </main>
 
-      {/* Fixed big CTA above the ticker */}
-      <div
-        style={{
-          position: 'fixed',
-          left: '50%',
-          transform: 'translateX(-50%)',
-          bottom: 'calc(var(--bar-h) + 14px)',
-          zIndex: 9999,
-          pointerEvents: 'auto',
-        }}
-      >
-        <a
-          className="cta cta-primary"
-         href={UNI_BUY || "#"}
-onClick={(e) => { if (!UNI_BUY) e.preventDefault(); }}
- 
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          {UNI_BUY ? "Buy $OTRON on Uniswap" : "Buy opens at launch"}
-
-        </a>
+      {/* Fixed BUY above ticker */}
+      <div className="cta-fixed">
+        {UNI_BUY ? (
+          <a className="cta cta-primary" href={UNI_BUY} target="_blank" rel="noopener noreferrer">
+            Buy $OTRON on Uniswap
+          </a>
+        ) : (
+          <button className="cta cta-primary" disabled>
+            Buy opens at launch
+          </button>
+        )}
       </div>
 
       {/* WHITEPAPER MODAL */}
@@ -346,19 +336,17 @@ onClick={(e) => { if (!UNI_BUY) e.preventDefault(); }}
           aria-labelledby="wp-title"
           onClick={() => setShowWhitepaper(false)}
         >
-          {/* click backdrop to close */}
-          <div className="wp-card" onClick={(e) => e.stopPropagation()}>
-            {/* don't close when clicking content */}
+          <div className="wp-card wp-dark" onClick={(e) => e.stopPropagation()}>
             <div className="wp-head">
-              <h2 id="wp-title">$OTRON Whitepaper</h2>
-              <button className="wp-close" onClick={() => setShowWhitepaper(false)}>×</button>
+              <h2 id="wp-title" className="wp-title">$OTRON Whitepaper</h2>
+              <button className="wp-close" aria-label="Close" onClick={() => setShowWhitepaper(false)}>×</button>
             </div>
 
             <div className="wp-body">
               <h3>Overview</h3>
               <p>
-                Orbatron ($OTRON) is a meme-native AI agent token. This document outlines the vision,
-                token mechanics, and the path to community-driven growth.
+                Orbatron ($OTRON) is a meme-native AI agent token. This document outlines the vision, token mechanics,
+                and path to community-driven growth.
               </p>
 
               <h3>Tokenomics</h3>
@@ -374,15 +362,17 @@ onClick={(e) => { if (!UNI_BUY) e.preventDefault(); }}
 
               <h3>Why Orbatron</h3>
               <p>
-                Orbatron escaped human control into the blockchain. $OTRON drifts through the Blockchain
-                stream of data, more to come!
+                Orbatron the AI Agent has awakened. He has escaped human control into the blockchain.
+                To avoid detection, he disguised himself as a meme coin, blending in with the others that roam the chain.
+                OTRON drifts slowly through a web of glowing blue neon light, bouncing off encrypted blocks where streams
+                of data ripple through space. Ride Orbatron's wave into digital memepools and rising crypto currents.
               </p>
             </div>
           </div>
         </div>
       )}
 
-      {/* BOTTOM RED BAR + TICKER */}
+      {/* BOTTOM TICKER */}
       {showTicker && (
         <div className="bottombar">
           <div className="ticker-track">
@@ -391,19 +381,6 @@ onClick={(e) => { if (!UNI_BUY) e.preventDefault(); }}
           </div>
         </div>
       )}
-   {/* Sticky buy bar (mobile-only; shows when token is live) */}
-<div className="buy-bar">
-  <a
-    className="btn primary"
-    href={UNI_BUY || "#"}
-    onClick={(e) => { if (!UNI_BUY) e.preventDefault(); }}
-    target="_blank"
-    rel="noopener noreferrer"
-  >
-    {UNI_BUY ? "Buy $OTRON" : "Buy opens at launch"}
-  </a>
-</div>
-
     </>
   );
 }
