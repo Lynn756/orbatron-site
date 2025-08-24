@@ -258,11 +258,12 @@ export default function Home() {
             <Image src="/orbatron-coin.png" alt="Orbatron Coin" width={64} height={64} priority />
             <span className="token-label">$OTRON</span>
           </div>
+         <img src="/orbatron.png" alt="Orbatron" width="400" height="400" />
 
           {/* Robot + caption (names sit directly under feet) */}
           <div className="robot-stage">
             <div className="robot-wrapper">
-              <Image src="/orbatron.png" alt="Orbatron" width={300} height={300} priority />
+              
             </div>
             <div className="robot-caption">
               <div className="robot-name">Orbatron</div>
