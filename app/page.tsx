@@ -115,6 +115,12 @@ export default function Home() {
     );
   }, []);
 
+  // stop audio if user navigates away or component unmounts
+  useEffect(() => {
+    return () => stopTyping(audioEl.current);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   // start line 1 after a short delay
   useEffect(() => {
     const t = setTimeout(() => setShow1(true), 700);
@@ -129,7 +135,7 @@ export default function Home() {
   // when line 1 starts
   useEffect(() => {
     if (show1) startTyping(audioEl.current);
-  }, [show1]);
+  }, [show1, audioEl]);
 
   // when line 1 finishes
   useEffect(() => {
@@ -145,12 +151,12 @@ export default function Home() {
         return () => clearTimeout(t);
       }
     }
-  }, [count1, show1, message2]);
+  }, [count1, show1, message2, audioEl]);
 
   // when line 2 starts
   useEffect(() => {
     if (show2 && count2 < message2.length) startTyping(audioEl.current);
-  }, [show2, count2, message2.length]);
+  }, [show2, count2, message2.length, audioEl]);
 
   // when line 2 finishes
   useEffect(() => {
@@ -160,7 +166,7 @@ export default function Home() {
       const t = setTimeout(() => setShowEnd(true), 1200);
       return () => clearTimeout(t);
     }
-  }, [count2, show2, message2.length]);
+  }, [count2, show2, message2.length, audioEl]);
 
   // END blinks
   useEffect(() => {
@@ -173,14 +179,32 @@ export default function Home() {
     return () => clearInterval(id);
   }, [showEnd]);
 
-  // Whitepaper modal: esc + lock scroll
-  useEffect(() => {
-    if (!showWhitepaper) return;
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setShowWhitepaper(false);
-    document.addEventListener('keydown', onKey);
-    const prev = document.body.style.overflow; document.body.style.overflow = 'hidden';
-    return () => { document.removeEventListener('keydown', onKey); document.body.style.overflow = prev; };
-  }, [showWhitepaper]);
+  // -------------------- Copy Button state --------------------
+  const [copied, setCopied] = useState(false);
+  const copyContract = async () => {
+    try {
+      await navigator.clipboard.writeText(OTRON_CONTRACT);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      // fallback
+      const ta = document.createElement('textarea');
+      ta.value = OTRON_CONTRACT;
+      ta.style.position = 'fixed';
+      ta.style.left = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); } catch {}
+      document.body.removeChild(ta);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    }
+  };
+
+  const shortAddr =
+    OTRON_CONTRACT && OTRON_CONTRACT.startsWith('0x') && OTRON_CONTRACT.length > 12
+      ? `${OTRON_CONTRACT.slice(0, 10)}…${OTRON_CONTRACT.slice(-6)}`
+      : OTRON_CONTRACT;
 
   return (
     <>
@@ -239,15 +263,27 @@ export default function Home() {
       </nav>
 
       {/* CONTRACT CHIP */}
-      <div
-        className="contract-chip"
-        onClick={() => navigator.clipboard.writeText(OTRON_CONTRACT)}
-        title="Click to copy contract"
-      >
+      <div className="contract-chip" role="group" aria-label="Token contract">
         <span className="chip-label">Contract</span>
-        <span className="chip-hash">
-          {OTRON_CONTRACT.slice(0, 10)}…{OTRON_CONTRACT.slice(-6)}
-        </span>
+        <span className="chip-hash" title={OTRON_CONTRACT}>{shortAddr}</span>
+
+        <button
+          className="copy-btn"
+          type="button"
+          onClick={copyContract}
+          aria-label="Copy contract address"
+          aria-live="polite"
+          title="Copy contract"
+        >
+          {copied ? 'Copied!' : (
+            <>
+              <svg className="copy-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                <path d="M16 1H4a2 2 0 0 0-2 2v12h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z" fill="currentColor"/>
+              </svg>
+              Copy
+            </>
+          )}
+        </button>
       </div>
 
       {/* PAGE */}
@@ -262,7 +298,7 @@ export default function Home() {
           {/* Robot + caption (names sit directly under feet) */}
           <div className="robot-stage">
             <div className="robot-wrapper">
-              <Image src="/robot.png" alt="Orbatron" width={300} height={300} priority />
+              <Image src="/orbatron.png" alt="Orbatron" width={300} height={300} unoptimized />
             </div>
             <div className="robot-caption">
               <div className="robot-name">Orbatron</div>

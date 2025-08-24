@@ -1,5 +1,7 @@
 
-/* ===== THEME ===== */
+/* =========================
+   THEME TOKENS
+   ========================= */
 :root{
   --page-bg:#70e4f3;
   --fg:#0e0d01;
@@ -10,9 +12,15 @@
 
   --ticker-h:56px;
   --ticker-speed:28s;
+
+  /* icon defaults (desktop) */
+  --icons-justify: space-between;
+  --icons-gap: 0px;
 }
 
-/* ===== BASE ===== */
+/* =========================
+   BASE
+   ========================= */
 *{ box-sizing:border-box; }
 html,body{ margin:0; height:100%; }
 body{
@@ -23,25 +31,36 @@ body{
   overflow-y:auto;
 }
 
-/* ===== TOP BAR ===== */
+/* =========================
+   TOP BAR
+   ========================= */
 .topbar{
-  position: sticky; top: 0; z-index: 20;
-  background: var(--bar-bg);
-  border-bottom: 2px solid var(--bar-stroke);
-  padding: 10px 20px;
+  position:sticky; top:0; z-index:20;
+  background:var(--bar-bg);
+  border-bottom:2px solid var(--bar-stroke);
+  padding:10px 20px;
 
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  display:grid;
+  grid-template-columns:1fr auto 1fr;
   grid-template-areas:
     "left center right"
     "icons icons icons";
-  align-items: center;
-  row-gap: 8px;
-  min-height: 64px;
+  align-items:center;
+  row-gap:6px;
+  min-height:64px;
 }
+
 .topbar-left   { grid-area:left;  display:flex; align-items:center; gap:10px; }
 .topbar-center { grid-area:center; display:flex; align-items:center; justify-content:center; }
 .topbar-right  { grid-area:right; display:flex; align-items:center; justify-content:flex-end; }
+
+.logo-coin{ width:60px; height:60px; display:block; }
+.token-name{ color:#0ad9e0; font-weight:800; font-size:2.4rem; letter-spacing:.03em; }
+
+.network{
+  color:#0fdae9; opacity:.95; font-weight:700;
+  font-size:1.3rem; letter-spacing:.02em;
+}
 
 /* Whitepaper button */
 .wp-btn{
@@ -50,46 +69,46 @@ body{
   cursor:pointer; white-space:nowrap;
 }
 
-/* Left: coin + token name */
-.logo-coin{ width:60px; height:60px; display:block; }
-.token-name{ color:#fff; font-weight:800; font-size:2.4rem; letter-spacing:.03em; }
-
-/* Right: network */
-.network{ color:#fff; opacity:.9; font-weight:600; font-size:1.05rem; }
-
-/* ===== ICON RAIL ===== */
+/* =========================
+   ICON RAIL (desktop)
+   ========================= */
 .topbar-icons{
   grid-area:icons;
-  width: clamp(420px, 52vw, 700px);
-  margin: 4px auto 0;
-  display:flex; align-items:center; justify-content:space-between;
+  width:min(100%, 1100px);
+  margin:4px auto 0;
+  display:flex; align-items:center;
+  justify-content: var(--icons-justify);
+  gap: var(--icons-gap);
 }
+
+/* Utility modifiers (choose one in markup if you want to override) */
+.topbar-icons.icons-spread  { --icons-justify: space-between; --icons-gap: 0px; }
+.topbar-icons.icons-center  { --icons-justify: center;        --icons-gap: 24px; }
+
 .topbar-icons a{
   display:inline-flex; align-items:center; justify-content:center;
   width:48px; height:48px; border-radius:10px;
-  background:#1f1f1f;
   transition: transform .15s ease, filter .15s ease, background .15s ease;
 }
 .topbar-icons a:hover{ transform: translateY(-1px) scale(1.06); }
 
-.topbar-icons img.social-icon{
-  width:28px; height:28px; display:block;
-  background:transparent !important;
-}
+.topbar-icons img.social-icon{ width:37px; height:37px; display:block; }
 
 /* Brand backgrounds */
 .topbar-icons a:has(img[alt="Instagram"]){
-  background: linear-gradient(45deg,#7ee40a,#e6e341,#dc2743,#d3e247,#74e20e);
+  background:linear-gradient(45deg,#220686,#f0dd32,#97cf15,#f0f00d,#0d0480);
 }
 .topbar-icons a:has(img[alt="Discord"]){  background:#5ce40d; }
 .topbar-icons a:has(img[alt="X"])       {  background:#14e8f0; }
 .topbar-icons a:has(img[alt="Bluesky"]) {  background:#cd48df; }
 .topbar-icons a:has(img[alt="Telegram"]){  background:#f7f583; }
 
-/* ===== CONTRACT PILL ===== */
+/* =========================
+   CONTRACT CHIP
+   ========================= */
 .contract-chip{
   position:relative; z-index:19;
-  margin:10px auto 0;
+  margin:10px auto 28px;                    /* spacing so robot isn't cramped */
   display:grid; grid-auto-flow:column; align-items:center; gap:10px;
   width:max-content; max-width:92vw;
   padding:8px 12px; border-radius:999px;
@@ -102,47 +121,49 @@ body{
   font-weight:600; letter-spacing:.02em;
   white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width:54vw;
 }
+.copy-btn{
+  background:#fff; color:#0b0905; font-weight:700; font-size:.9rem;
+  border:0; border-radius:8px; padding:6px 12px; cursor:pointer;
+  display:inline-flex; align-items:center; gap:8px;
+  transition: transform .12s ease, background .12s ease, box-shadow .12s ease;
+}
+.copy-btn:hover{ transform:translateY(-1px); background:#ffd48a; }
+.copy-btn:active{ transform:translateY(0); }
+.copy-icon{ width:16px; height:16px; display:inline-block; }
 
-/* ===== PAGE LAYOUT ===== */
+/* =========================
+   PAGE LAYOUT
+   ========================= */
 .page{ padding:12px 16px calc(var(--ticker-h) + 90px); }
 .content{ position:relative; max-width:1000px; margin:0 auto; text-align:center; }
 
-/* Top-right coin badge */
+/* Coin badge (cyan page) */
 .blue-coin-topright{
   position:absolute; top:10px; right:16px;
   display:flex; flex-direction:column; align-items:center; z-index:6;
 }
 .blue-coin-topright img{ width:64px; height:64px; }
-.blue-coin-topright .token-label{
-  margin-top:4px; font-weight:800; font-size:.95rem; color:#0e0d01;
-}
+.blue-coin-topright .token-label{ margin-top:4px; font-weight:800; font-size:.95rem; color:#0e0d01; }
 
-/* ===== ROBOT / CAPTION — DESKTOP (natural flow) ===== */
-.robot-stage{
-  display:flex; flex-direction:column; align-items:center;
-  margin-top:8px;
-}
+/* Robot + caption (desktop) */
+.robot-stage{ display:flex; flex-direction:column; align-items:center; margin-top:24px; }
 .robot-wrapper{ margin:0; }
 .robot-wrapper img{
-  display:block;
-  width:min(80vw,340px);
-  height:auto;
-  filter:drop-shadow(0 6px 14px rgba(0,0,0,.25));
-  margin:0;
+  display:block; width:min(80vw,340px); height:auto;
+  filter:drop-shadow(0 6px 14px rgba(0,0,0,.25)); margin:0;
 }
-/* caption under the feet */
 .robot-caption{ margin-top:-60px; text-align:center; line-height:1.15; }
 .robot-name{ margin:0; line-height:1.2; }
-.robot-name:first-of-type{ font-weight:800; font-size:2rem; }         /* Orbatron */
-.robot-name:first-of-type + .robot-name{ font-weight:700; font-size:1.75rem; margin-top:-5px; } /* AI Agent */
+.robot-name:first-of-type{ font-weight:800; font-size:2rem; }
+.robot-name:first-of-type + .robot-name{ font-weight:700; font-size:1.75rem; margin-top:-5px; }
 
-/* ===== TRANSMISSION ===== */
+/* Transmission */
 .transmission{ max-width:900px; margin:30px auto 0; padding:0 8px; overflow:visible; }
 .intro-static{ font-size:1.6rem; margin:0 0 20px; text-shadow:0 0 8px var(--brand); }
 .tw{ font-size:1.35rem; line-height:1.45; white-space:pre-wrap; word-break:break-word; display:block; }
 .end{ font-size:1.4rem; margin-top:28px; }
 
-/* ===== BUY DOT & CTA ===== */
+/* CTA / Buy dot */
 .uniswap-dot{
   width:40px; height:40px; border-radius:50%; background:var(--brand);
   display:flex; align-items:center; justify-content:center; margin:12px auto 8px;
@@ -152,268 +173,123 @@ body{
 .cta-primary{ background:var(--brand); color:#0b0905; }
 .cta-fixed{
   position:fixed; left:50%; transform:translateX(-50%);
-  bottom: calc(var(--ticker-h) + 14px);
-  z-index:1000;
+  bottom: calc(var(--ticker-h) + 14px); z-index:1000;
 }
 
-/* ===== BOTTOM TICKER ===== */
+/* =========================
+   BOTTOM TICKER
+   ========================= */
 .bottombar{
   position:fixed; left:0; right:0; bottom:0; z-index:9;
-  height:var(--ticker-h); background:var(--bar-bg);
-  border-top:2px solid var(--bar-stroke); overflow:hidden;
+  height:var(--ticker-h); background:var(--bar-bg); border-top:2px solid var(--bar-stroke); overflow:hidden;
 }
-.ticker-track{
-  display:inline-block; white-space:nowrap; padding-left:100%;
-  line-height:var(--ticker-h); animation: tickerScroll var(--ticker-speed) linear infinite;
-}
-.ticker-item{
-  display:inline-block; padding:0 1.5rem; color:#fff; text-shadow:0 0 8px rgba(0,0,0,.4);
-  font:600 14px ui-monospace, Menlo, monospace; letter-spacing:.03em;
-}
+.ticker-track{ display:inline-block; white-space:nowrap; padding-left:100%; line-height:var(--ticker-h); animation:tickerScroll var(--ticker-speed) linear infinite; }
+.ticker-item{ display:inline-block; padding:0 1.5rem; color:#fff; text-shadow:0 0 8px rgba(0,0,0,.4); font:600 14px ui-monospace, Menlo, monospace; letter-spacing:.03em; }
 @keyframes tickerScroll{ to{ transform:translateX(-100%); } }
 @media (prefers-reduced-motion:reduce){ .ticker-track{ animation:none; } }
 
-/* ===== MOBILE ===== */
+/* =========================
+   WHITEPAPER MODAL
+   ========================= */
+.wp-modal{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.6); z-index:3000; }
+.wp-card{
+  background:#fff; color:#0b0905; width:min(92vw,720px); max-height:min(86vh,900px);
+  border-radius:14px; border:2px solid var(--brand); box-shadow:0 20px 60px rgba(0,0,0,.45); overflow:auto;
+}
+.wp-head{ position:sticky; top:0; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 16px; background:#fff; border-bottom:1px solid rgba(0,0,0,.08); z-index:1; }
+.wp-body{ padding:16px; line-height:1.35; }
+.wp-close{ border:0; background:transparent; font-size:28px; line-height:1; cursor:pointer; }
+.wp-card.wp-dark{
+  background:#e01e1e; color:#f5f5f5; border:1px solid rgba(233,140,19,.55);
+  box-shadow:0 22px 60px rgba(0,0,0,.45), 0 0 18px rgba(233,140,19,.35);
+}
+.wp-card.wp-dark a{ color:#ffd48a; }
+.wp-card.wp-dark .wp-head{ background:#2ac8ce; border-bottom:1px solid rgba(255,255,255,.15); }
+.wp-card.wp-dark .wp-head h2{ color:#fff; font-weight:800; }
+.wp-card.wp-dark .wp-close{ color:#fff; }
+
+/* =========================
+   MOBILE ONLY
+   ========================= */
 @media (max-width:700px){
   .topbar{
     padding:8px 12px;
-    grid-template-columns:1fr;
+    grid-template-columns:1fr auto;
     grid-template-areas:
-      "left"
-      "center"
-      "right"
-      "icons";
+      "left right"
+      "center center"
+      "icons icons";
   }
   .logo-coin{ width:28px; height:28px; }
   .token-name{ font-size:1.35rem; }
   .network{ font-size:13px; }
 
-  .topbar-icons{ width:100%; justify-content:center; gap:16px; }
-  .topbar-icons a{ width:42px; height:42px; }
-  .topbar-icons img.social-icon{ width:24px; height:24px; }
+  .topbar-icons{
+    width:100%;
+    justify-content:center !important;   /* always centered on phones */
+    gap:16px !important;
+  }
 
   .blue-coin-topright{ top:6px; right:10px; }
   .blue-coin-topright img{ width:48px; height:48px; }
   .blue-coin-topright .token-label{ font-size:.85rem; }
 
-  /* prevent CTA/ticker from covering last typed lines */
   .page{ padding:12px 12px calc(var(--ticker-h) + 160px); }
 
-  /* MOBILE robot: caption pinned to feet, transmission unaffected */
   .robot-stage{
-    position: relative;
-    display: inline-block;
-    padding-bottom: 2.4em;   /* reserve space for two lines */
-    margin-top: 8px;
-    line-height: 0;
+    position:relative; display:inline-block; padding-bottom:3.2em; margin-top:8px; line-height:0;
   }
-  .robot-wrapper img{
-    width:220px; height:auto; display:block;
-  }
+  .robot-wrapper img{ width:220px; height:auto; }
   .robot-caption{
-    position:absolute; left:50%; top:100%;
-    transform: translate(-50%, -80px);  /* tweak -4…-8px if needed */
-    margin:0; text-align:center; line-height:1.05;
-    pointer-events:none; white-space:nowrap;
+    position:absolute; left:50%; top:100%; transform:translate(-50%, -10px);
+    margin:0; text-align:center; line-height:1.05; pointer-events:none; white-space:nowrap;
   }
-  .robot-name:first-of-type{ font-size:1.15rem; font-weight:800; }     /* Orbatron */
-  .robot-name:first-of-type + .robot-name{ font-size:1.00rem; font-weight:700; margin-top:2px; } /* AI Agent */
+  .robot-name:first-of-type{ font-size:1.15rem; font-weight:800; }
+  .robot-name:first-of-type + .robot-name{ font-size:1.00rem; font-weight:700; margin-top:2px; }
 
-  /* transmission headings aligned on mobile */
-  .intro-static{ font-size:1rem; }
-  .end{ font-size:1rem; }
+  .intro-static,.end{ font-size:1rem; }
+
+  .cta-fixed{
+    bottom: calc(var(--ticker-h) + 20px);
+    width:100%; display:flex; justify-content:center; pointer-events:none;
+  }
+  .cta-fixed .cta-primary{
+    pointer-events:auto; background:var(--brand); color:#0b0905;
+    font-size:1rem; font-weight:800; border-radius:14px; padding:12px 20px;
+    border:2px solid rgba(0,0,0,.15); box-shadow:0 6px 16px rgba(0,0,0,.25);
+  }
 }
 
-/* Extra small phones */
 @media (max-width:380px){
   .robot-wrapper img{ width:200px; }
-  .robot-caption{ transform: translate(-50%, -4px); }
+  .robot-caption{ transform:translate(-50%,-8px); }
   .robot-name:first-of-type{ font-size:1.05rem; }
   .robot-name:first-of-type + .robot-name{ font-size:.95rem; }
 }
-
-/* === WHITEPAPER MODAL (backdrop, card, close) === */
-.wp-modal{
-  position: fixed; inset: 0;
-  display: flex; align-items: center; justify-content: center;
-  background: rgba(0,0,0,.6);
-  z-index: 3000;
-}
-.wp-card{
-  background: #fff; color: #0b0905;
-  width: min(92vw, 720px);
-  max-height: min(86vh, 900px);
-  border-radius: 14px;
-  border: 2px solid var(--brand);
-  box-shadow: 0 20px 60px rgba(0,0,0,.45);
-  overflow: auto;
-}
-.wp-head{
-  position: sticky; top: 0;
-  display:flex; align-items:center; justify-content:space-between; gap:12px;
-  padding: 14px 16px;
-  background: #fff;
-  border-bottom: 1px solid rgba(0,0,0,.08);
-  z-index: 1;
-}
-.wp-body{ padding:16px; line-height:1.35; }
-.wp-close{ border:0; background:transparent; font-size:28px; line-height:1; cursor:pointer; }
+/* === MOBILE: keep Orbatron's name under his feet (desktop unchanged) === */
 @media (max-width:700px){
-  .wp-card{ width:94vw; max-height:88vh; }
-  .wp-body{ padding:14px; }
-}
-
-/* === WHITEPAPER DARK VARIANT (background + font + glow edge) === */
-/* Add class 'wp-dark' to your card: <div class="wp-card wp-dark"> */
-.wp-card.wp-dark{
-  background:#e01e1e;       /* background color */
-  color:#f5f5f5;         /* text color */
-  border:1px solid rgba(233,140,19,.55);
-  box-shadow:
-    0 22px 60px rgba(0,0,0,.45),
-    0 0 18px rgba(233,140,19,.35); /* orange glow edge */
-}
-.wp-card.wp-dark h1,
-.wp-card.wp-dark h2,
-.wp-card.wp-dark h3,
-.wp-card.wp-dark p,
-.wp-card.wp-dark li{ color:inherit; }
-.wp-card.wp-dark a{ color:#ffd48a; }
-
-/* ===== MOBILE BUY BUTTON (phone only; desktop unchanged) ===== */
-@media (max-width:700px){
-  .cta-fixed{
-    position:fixed; left:50%; transform:translateX(-50%);
-    bottom: calc(var(--ticker-h) + 20px);
-    z-index:1000;
-    width:100%;
-    display:flex; justify-content:center;
-    pointer-events:none;           /* parent doesn't block clicks */
-  }
-  .cta-fixed .cta-primary{
-    pointer-events:auto;           /* button clickable */
-    background: var(--brand);
-    color:#d49310;
-    font-size:1rem; font-weight:800;
-    border-radius:14px;
-    padding:12px 20px;
-    border:2px solid rgba(224, 20, 20, 0.767);
-    box-shadow:0 6px 16px rgba(0,0,0,.25);
-    text-align:center;
-    min-width:70%; max-width:90%;
-  }
-}
-
-/* ===== Utility: glow-card (general use) ===== */
-.glow-card{
-  background:#d80c0c;            /* panel background */
-  color:#d61818;              /* text color */
-  padding:20px; border-radius:12px;
-  position:relative; z-index:0; overflow:hidden;
-}
-.glow-card::before{
-  content:""; position:absolute;
-  top:-2px; left:-2px; right:-2px; bottom:-2px;
-  background: linear-gradient(45deg, #98e20e, #ffae00, #08da24, #3feb14);
-  background-size:400% 400%;
-  filter: blur(12px);
-  z-index:-1;
-  animation: glow-anim 10s ease infinite;
-}
-@keyframes glow-anim{
-  0%{ background-position:0% 50%; }
-  50%{ background-position:100% 50%; }
-  100%{ background-position:0% 50%; }
-}
-/* Whitepaper dark header fix */
-.wp-card.wp-dark .wp-head {
-  background: #2ac8ce;   /* same as wp-dark background */
-  border-bottom: 1px solid rgba(255,255,255,.15);
-}
-
-.wp-card.wp-dark .wp-head h2 {
-  color: #fff;           /* bright white title */
-  font-weight: 800;
-}
-
-.wp-card.wp-dark .wp-close {
-  color: #fff;           /* make the close button visible */
-}
-/* ===== PHONE-ONLY FIXES (do not affect desktop) ===== */
-@media (max-width:700px){
-
-  /* 1) Re-pin the name/subtitle to the feet and keep the message below */
   .robot-stage{
-    position: relative !important;
-    display: inline-block !important;
-    padding-bottom: 3.2em !important;   /* reserve space for the two lines */
-    line-height: 0 !important;
+    position: relative;
+    display: inline-block;
+    line-height: 0;            /* kill extra line height around the image */
+    padding-bottom: 3.0em;     /* reserve space for the two caption lines */
   }
+
+  .robot-wrapper img{
+    display:block;
+    width:220px;               /* your current mobile size */
+    height:auto;
+    margin:0 auto;
+  }
+
   .robot-caption{
-    position: absolute !important;
-    left: 50% !important;
-    top: 100% !important;
-    transform: translate(-50%, -10px) !important; /* -6 to -12px = closer/farther */
-    margin: 0 !important;
-    line-height: 1.05 !important;
-    pointer-events: none !important;
-    white-space: nowrap !important;
+    position: absolute;
+    left: 50%;
+    top: 100%;                 /* anchor at image bottom */
+    transform: translate(-50%, -90px); /* nudge upward toward the feet */
+    margin: 0 !important;      /* override desktop’s negative margin */
+    line-height: 1.05;
+    white-space: nowrap;
+    pointer-events: none;
   }
-
-  /* 2) Button text visibility on orange */
-  .cta-fixed .cta-primary{
-    background: var(--brand) !important;
-    color: #0b0905 !important;          /* force dark text on orange */
-    -webkit-text-fill-color: #0b0905 !important; /* iOS Safari quirk */
-    opacity: 1 !important;
-    text-shadow: none !important;
-    border: 2px solid rgba(0,0,0,.15) !important;
-    box-shadow: 0 6px 16px rgba(0,0,0,.25) !important;
-    font-weight: 800 !important;
-  }
-}
-
-/* tiny phones */
-@media (max-width:380px){
-  .robot-stage{ padding-bottom: 3.4em !important; }
-  .robot-caption{ transform: translate(-50%, -8px) !important; }
-}
-/* ===== PHONE-ONLY FIXES (do not affect desktop) ===== */
-@media (max-width:700px){
-
-  /* 1) Re-pin the name/subtitle to the feet and keep the message below */
-  .robot-stage{
-    position: relative !important;
-    display: inline-block !important;
-    padding-bottom: 3.2em !important;   /* reserve space for the two lines */
-    line-height: 0 !important;
-  }
-  .robot-caption{
-    position: absolute !important;
-    left: 50% !important;
-    top: 100% !important;
-    transform: translate(-50%, -80px) !important; /* -6 to -12px = closer/farther */
-    margin: 0 !important;
-    line-height: 1.05 !important;
-    pointer-events: none !important;
-    white-space: nowrap !important;
-  }
-
-  /* 2) Button text visibility on orange */
-  .cta-fixed .cta-primary{
-    background: var(--brand) !important;
-    color: #0b0905 !important;          /* force dark text on orange */
-    -webkit-text-fill-color: #0b0905 !important; /* iOS Safari quirk */
-    opacity: 1 !important;
-    text-shadow: none !important;
-    border: 2px solid rgba(0,0,0,.15) !important;
-    box-shadow: 0 6px 16px rgba(0,0,0,.25) !important;
-    font-weight: 800 !important;
-  }
-}
-
-/* tiny phones */
-@media (max-width:380px){
-  .robot-stage{ padding-bottom: 3.4em !important; }
-  .robot-caption{ transform: translate(-50%, -10px) !important; }
 }
