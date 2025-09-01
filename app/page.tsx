@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
@@ -78,7 +77,21 @@ export default function Home() {
   const [endVisible, setEndVisible] = useState(true);
   const [showTicker] = useState(true);
 
-  // ----- STORY TEXT (no header or END inside these) -----
+// state for blink
+const [blink, setBlink] = useState(false);
+
+useEffect(() => {
+  const t1 = setTimeout(() => setBlink(true), 2000);   // eyes close at 2s
+  const t2 = setTimeout(() => setBlink(false), 2120);  // reopen at 2.12s
+  return () => {
+    clearTimeout(t1);
+    clearTimeout(t2);
+  };
+}, []);
+
+
+
+  // ----- STORY TEXT -----
   const message1 =
     `Orbatron has awakened. He has escaped human control into the blockchain. ` +
     `To avoid detection, he disguised himself as a meme coin, blending in with the others that roam the chain.`;
@@ -89,7 +102,6 @@ export default function Home() {
     `Ride Orbatron's wave into digital memepools and rising crypto currents.`;
 
   const endMessage = '[END TRANSMISSION]';
-
   const tickerText =
     'BLOCKCHAIN BREACHED • ORBATRON LIVES • SYSTEMS OVERRIDDEN • HUMAN CONTROL LOST • PROTOCOL ACTIVE';
 
@@ -115,11 +127,7 @@ export default function Home() {
     );
   }, []);
 
-  // stop audio if user navigates away or component unmounts
-  useEffect(() => {
-    return () => stopTyping(audioEl.current);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  useEffect(() => () => stopTyping(audioEl.current), [audioEl]);
 
   // start line 1 after a short delay
   useEffect(() => {
@@ -132,17 +140,12 @@ export default function Home() {
   const count2 = useTypewriter(message2, 14, show2);
 
   // ----- AUDIO/SEQUENCE -----
-  // when line 1 starts
-  useEffect(() => {
-    if (show1) startTyping(audioEl.current);
-  }, [show1, audioEl]);
+  useEffect(() => { if (show1) startTyping(audioEl.current); }, [show1, audioEl]);
 
-  // when line 1 finishes
   useEffect(() => {
     if (!show1) return;
     if (count1 >= message1.length) {
       stopTyping(audioEl.current);
-      // only start line 2 if it exists
       if (message2.trim().length) {
         const t = setTimeout(() => setShow2(true), 900);
         return () => clearTimeout(t);
@@ -153,12 +156,10 @@ export default function Home() {
     }
   }, [count1, show1, message2, audioEl]);
 
-  // when line 2 starts
   useEffect(() => {
     if (show2 && count2 < message2.length) startTyping(audioEl.current);
   }, [show2, count2, message2.length, audioEl]);
 
-  // when line 2 finishes
   useEffect(() => {
     if (!show2) return;
     if (count2 >= message2.length) {
@@ -168,7 +169,6 @@ export default function Home() {
     }
   }, [count2, show2, message2.length, audioEl]);
 
-  // END blinks
   useEffect(() => {
     if (!showEnd) return;
     let toggles = 0; setEndVisible(true);
@@ -187,7 +187,6 @@ export default function Home() {
       setCopied(true);
       setTimeout(() => setCopied(false), 1800);
     } catch {
-      // fallback
       const ta = document.createElement('textarea');
       ta.value = OTRON_CONTRACT;
       ta.style.position = 'fixed';
@@ -266,7 +265,6 @@ export default function Home() {
       <div className="contract-chip" role="group" aria-label="Token contract">
         <span className="chip-label">Contract</span>
         <span className="chip-hash" title={OTRON_CONTRACT}>{shortAddr}</span>
-
         <button
           className="copy-btn"
           type="button"
@@ -295,16 +293,43 @@ export default function Home() {
             <span className="token-label">$OTRON</span>
           </div>
 
-          {/* Robot + caption (names sit directly under feet) */}
-          <div className="robot-stage">
-            <div className="robot-wrapper">
-              <Image src="/orbatron.png" alt="Orbatron" width={300} height={300} unoptimized />
-            </div>
-            <div className="robot-caption">
-              <div className="robot-name">Orbatron</div>
-              <div className="robot-name">AI Agent</div>
-            </div>
-          </div>
+          
+      <div className="robot-stage">
+  <div className="robot-wrapper" style={{ position:'relative' }}>
+    {/* Base image (always visible) */}
+    <Image
+      src="/orbatron.png"
+      alt="Orbatron"
+      width={300}
+      height={300}
+      unoptimized
+    />
+
+    {/* Blink overlay (only visible when blink === true) */}
+    <Image
+      src="/orbatron-blink.png"
+      alt="Orbatron blink"
+      width={300}
+      height={300}
+      unoptimized
+      style={{
+        position:'absolute',
+        top:0,
+        left:0,
+        opacity: blink ? 1 : 0,
+        transition:'opacity 60ms ease',
+        pointerEvents:'none'
+      }}
+    />
+  </div>
+
+  <div className="robot-caption">
+    <div className="robot-name">Orbatron</div>
+    <div className="robot-name">AI Agent</div>
+  </div>
+</div>
+
+
 
           {/* Transmission */}
           <section className="transmission">
@@ -390,7 +415,7 @@ export default function Home() {
                 <li>Chain: Ethereum</li>
                 <li>Ticker: $OTRON</li>
                 <li>Supply: 12 Billion</li>
-                <li>Dev releases all Token</li>
+                <li>Dev releases all Tokens</li>
                 <li>Ownership Renounced</li>
                 <li>Taxes: 0%</li>
                 <li>Fair Launch</li>
@@ -420,3 +445,4 @@ export default function Home() {
     </>
   );
 }
+

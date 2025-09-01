@@ -96,7 +96,7 @@ body{
 
 /* Brand backgrounds */
 .topbar-icons a:has(img[alt="Instagram"]){
-  background:linear-gradient(45deg,#220686,#f0dd32,#97cf15,#f0f00d,#0d0480);
+  background:linear-gradient(45deg,#cfb314,#f53c0e,#b1a9d3,#cf210a,#a14ed8);
 }
 .topbar-icons a:has(img[alt="Discord"]){  background:#5ce40d; }
 .topbar-icons a:has(img[alt="X"])       {  background:#14e8f0; }
@@ -293,3 +293,29 @@ body{
     pointer-events: none;
   }
 }
+.robot-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+/* eyelid base */
+.eyelid {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: #000;              /* eyelid color */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 80ms ease;
+  z-index: 5;                    /* above Orbatron image */
+}
+
+/* top eyelid covers top half */
+.eyelid-top { top: 0; }
+
+/* bottom eyelid covers bottom half */
+.eyelid-bottom { bottom: 0; }
+
+/* when blinking */
+.eyelid.on { opacity: 1; }
