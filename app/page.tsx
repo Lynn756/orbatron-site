@@ -245,8 +245,8 @@ useEffect(() => {
           <a href="https://discord.com" target="_blank" rel="noopener noreferrer">
             <img src="/discord.svg" alt="Discord" className="social-icon" />
           </a>
-          <a href="https://x.com" target="_blank" rel="noopener noreferrer">
-            <img src="/X.png" alt="X" className="social-icon" />
+          <a href="https://x.com/Orbatron143845" target="_blank" rel="noopener noreferrer">
+            <img src="/X.png" alt="Follow us on X" className="social-icon" />
           </a>
           <a href="https://bsky.app" target="_blank" rel="noopener noreferrer">
             <img src="/bluesky.png" alt="Bluesky" className="social-icon" />
