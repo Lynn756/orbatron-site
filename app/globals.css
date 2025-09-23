@@ -54,7 +54,7 @@ body{
 .topbar-center { grid-area:center; display:flex; align-items:center; justify-content:center; }
 .topbar-right  { grid-area:right; display:flex; align-items:center; justify-content:flex-end; }
 
-.logo-coin{ width:60px; height:60px; display:block; }
+.logo-coin{ width:70px; height:70px; display:block; }
 .token-name{ color:#0ad9e0; font-weight:800; font-size:2.4rem; letter-spacing:.03em; }
 
 .network{
@@ -96,7 +96,7 @@ body{
 
 /* Brand backgrounds */
 .topbar-icons a:has(img[alt="Instagram"]){
-  background:linear-gradient(45deg,#ddda13,hwb(59 8% 11%),#b1a9d3,#33e706,#dbd93c);
+  background:linear-gradient(45deg,#ddda13,hwb(59 8% 11%),#80da8c,#33e706,#dbd93c);
 }
 .topbar-icons a:has(img[alt="Discord"]){  background:#5ce40d; }
 .topbar-icons a:has(img[alt="X"])       {  background:#14e8f0; }
@@ -142,7 +142,7 @@ body{
   position:absolute; top:10px; right:16px;
   display:flex; flex-direction:column; align-items:center; z-index:6;
 }
-.blue-coin-topright img{ width:64px; height:64px; }
+.blue-coin-topright img{ width:140px; height:140px; }
 .blue-coin-topright .token-label{ margin-top:4px; font-weight:800; font-size:.95rem; color:#0e0d01; }
 
 /* Robot + caption (desktop) */

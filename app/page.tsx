@@ -212,7 +212,7 @@ useEffect(() => {
       {/* TOP BAR */}
       <nav className="topbar">
         <div className="topbar-left">
-          <Image className="logo-coin" src="/orbatron-coin.png" alt="Orbatron Coin" width={60} height={60} priority />
+          <Image className="logo-coin" src="/OtronCoin.png" alt="Otron Coin" width={70} height={70} priority />
           <span className="token-name">$OTRON</span>
         </div>
 
@@ -239,10 +239,10 @@ useEffect(() => {
         </div>
 
         <div className="topbar-icons">
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+          <a href="https://instagram.com/OTRONCOIN" target="_blank" rel="noopener noreferrer">
             <img src="/instagram.png" alt="Instagram" className="social-icon instagram-icon" />
           </a>
-          <a href="https://discord.com" target="_blank" rel="noopener noreferrer">
+          <a href="https://discord.com/Orbatron._76873" target="_blank" rel="noopener noreferrer">
             <img src="/discord.svg" alt="Discord" className="social-icon" />
           </a>
           <a href="https://x.com/Orbatron143845" target="_blank" rel="noopener noreferrer">
@@ -251,7 +251,7 @@ useEffect(() => {
           <a href="https://bsky.app" target="_blank" rel="noopener noreferrer">
             <img src="/bluesky.png" alt="Bluesky" className="social-icon" />
           </a>
-          <a href="https://t.me" target="_blank" rel="noopener noreferrer">
+          <a href="https://t.me/Orbatronofficial" target="_blank" rel="noopener noreferrer">
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"
               alt="Telegram"
@@ -289,7 +289,7 @@ useEffect(() => {
         <div className="content">
           {/* coin badge top-right of cyan page */}
           <div className="blue-coin-topright">
-            <Image src="/orbatron-coin.png" alt="Orbatron Coin" width={64} height={64} priority />
+            <Image src="/OtronCoin.png" alt="Otron Coin" width={74} height={74} priority />
             <span className="token-label">$OTRON</span>
           </div>
 
