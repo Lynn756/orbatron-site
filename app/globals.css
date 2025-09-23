@@ -96,7 +96,7 @@ body{
 
 /* Brand backgrounds */
 .topbar-icons a:has(img[alt="Instagram"]){
-  background:linear-gradient(45deg,#cfb314,#f53c0e,#b1a9d3,#cf210a,#a14ed8);
+  background:linear-gradient(45deg,#ddda13,hwb(59 8% 11%),#b1a9d3,#33e706,#dbd93c);
 }
 .topbar-icons a:has(img[alt="Discord"]){  background:#5ce40d; }
 .topbar-icons a:has(img[alt="X"])       {  background:#14e8f0; }
