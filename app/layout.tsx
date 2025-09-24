@@ -13,27 +13,45 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Orbatron — Official Site",
-  description: "Orbatron has been awakened. Mobile-first site.",
+  metadataBase: new URL("https://orbatroncoin.com"),
+  title: "Orbatron has awakened",
+  description:
+    "The AI agent who escaped human control has entered the Blockchain City. $OTRON lives on-chain, off-grid.",
+
   viewport: {
     width: "device-width",
     initialScale: 1,
     maximumScale: 1,
   },
+
   openGraph: {
-    title: "Orbatron — Official Site",
-    description: "Orbatron has been awakened. Mobile-first site.",
+    type: "website",
     url: "https://orbatroncoin.com",
     siteName: "Orbatron",
-    images: ["/Orbatron.png"], // make sure Orbatron.png is in /public
+    title: "Orbatron has awakened",
+    description:
+      "The AI agent who escaped human control has entered the Blockchain City. $OTRON lives on-chain, off-grid.",
+    images: [
+      {
+        url: "/otron-preview.jpg", // make sure this file is in /public
+        width: 1200,
+        height: 628,
+        alt: "Orbatron has awakened",
+      },
+    ],
   },
+
   twitter: {
     card: "summary_large_image",
-    title: "Orbatron — Official Site",
-    description: "Orbatron has been awakened. Mobile-first site.",
-    images: ["/Orbatron.png"],
+    title: "Orbatron has awakened",
+    description:
+      "The AI agent who escaped human control has entered the Blockchain City. $OTRON lives on-chain, off-grid.",
+    images: ["/otron-preview.jpg"],
   },
 };
+
+
+
 
 
 export default function RootLayout({
