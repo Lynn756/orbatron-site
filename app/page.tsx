@@ -10,7 +10,7 @@ const OTRON_CONTRACT = '0xYourTokenContractAddressHere';
 
 const UNI_BUY =
   OTRON_CONTRACT && OTRON_CONTRACT.startsWith('0x')
-    ? `https://app.uniswap.org/swap?outputCurrency=${OTRON_CONTRACT}&chain=ethereum`
+    ? `https://app.uniswap.org/swap?outputCurrency=${OTRON_CONTRACT}&chain=Base Mainnet`
     : '';
 
 // -------------------- Typewriter (RAF) --------------------
@@ -235,7 +235,7 @@ useEffect(() => {
         </div>
 
         <div className="topbar-right">
-          <span className="network">Ethereum • Mainnet</span>
+          <span className="network">Base • Mainnet</span>
         </div>
 
         <div className="topbar-icons">
@@ -412,7 +412,7 @@ useEffect(() => {
 
               <h3>Tokenomics</h3>
               <ul>
-                <li>Chain: Ethereum</li>
+                <li>Chain: Base Mainnet</li>
                 <li>Ticker: $OTRON</li>
                 <li>Supply: 12 Billion</li>
                 <li>Dev releases all Tokens</li>
