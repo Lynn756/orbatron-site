@@ -6,7 +6,7 @@ import Image from 'next/image';
 const MP3 = `${process.env.NEXT_PUBLIC_BASE_PATH ?? ''}/keyboard-typing.mp3`;
 
 // ⬇️ replace on launch
-const OTRON_CONTRACT = '0xYourTokenContractAddressHere';
+const OTRON_CONTRACT = '0x4752ba5dbc23f44d87826276bf6fd6b1c372ad24';
 
 const UNI_BUY =
   OTRON_CONTRACT && OTRON_CONTRACT.startsWith('0x')
@@ -221,6 +221,7 @@ useEffect(() => {
             className="wp-btn"
             onClick={async () => {
               try {
+
                 const el = document.getElementById('otron-typer') as HTMLAudioElement | null;
                 if (el) {
                   el.muted = true; await el.play(); el.pause(); el.currentTime = 0; el.muted = false;
