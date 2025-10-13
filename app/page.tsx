@@ -326,7 +326,9 @@ useEffect(() => {
 
   <div className="robot-caption">
     <div className="robot-name">Orbatron</div>
-    <div className="robot-name">AI Agent</div>
+    <div className="robot-name">
+      Life of Blockchain
+    </div>
   </div>
 </div>
 
