@@ -244,8 +244,8 @@ useEffect(() => {
             <img src="/instagram.png" alt="Instagram" className="social-icon instagram-icon" />
           </a>
           <a href="https://www.reddit.com/r/OrbatronCoin" target="_blank" rel="noopener noreferrer">
-  <img src="/reddit.png" alt="reddit" className="social-icon" />
-</a>
+         <img src="/reddit.png" alt="reddit" className="social-icon" />
+         </a>
 
           
           <a href="https://x.com/Orbatron143845" target="_blank" rel="noopener noreferrer">
