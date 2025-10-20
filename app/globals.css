@@ -87,7 +87,7 @@ body{
 
 .topbar-icons a{
   display:inline-flex; align-items:center; justify-content:center;
-  width:48px; height:48px; border-radius:10px;
+  width:50px; height:50px; border-radius:10px;
   transition: transform .15s ease, filter .15s ease, background .15s ease;
 }
 .topbar-icons a:hover{ transform: translateY(-1px) scale(1.06); }
@@ -96,12 +96,12 @@ body{
 
 /* Brand backgrounds */
 .topbar-icons a:has(img[alt="Instagram"]){
-  background:linear-gradient(45deg,#ddda13,hwb(59 8% 11%),#80da8c,#33e706,#dbd93c);
+  background:linear-gradient(45deg,#131212,hwb(59 8% 11%),#80da8c,#33e706,#0a0a0a);
 }
-.topbar-icons a:has(img[alt="Discord"]){  background:#5ce40d; }
-.topbar-icons a:has(img[alt="X"])       {  background:#14e8f0; }
-.topbar-icons a:has(img[alt="Bluesky"]) {  background:#cd48df; }
-.topbar-icons a:has(img[alt="Telegram"]){  background:#f7f583; }
+.topbar-icons a:has(img[alt="reddit"]){  background:#5ce40d; }
+.topbar-icons a:has(img[alt="X"])       {  background:#1dc00e; }
+.topbar-icons a:has(img[alt="Bluesky"]) {  background:#12b112; }
+.topbar-icons a:has(img[alt="Telegram"]){  background:#0dda62; }
 
 /* =========================
    CONTRACT CHIP

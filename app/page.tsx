@@ -93,8 +93,8 @@ useEffect(() => {
 
   // ----- STORY TEXT -----
   const message1 =
-    `Orbatron has awakened. He has escaped human control into the blockchain. ` +
-    `To avoid detection, he disguised himself as a meme coin, blending in with the others that roam the chain.`;
+    `Orbatron has awakened. $OTRON has escaped human control and entered the blockchain. ` +
+    `To avoid detection, $OTRON disguised as a meme coin, blending in with the others that roam the chain.`;
 
   const message2 =
     `$OTRON drifts slowly through a web of glowing blue neon light, ` +
@@ -243,11 +243,13 @@ useEffect(() => {
           <a href="https://instagram.com/OTRONCOIN" target="_blank" rel="noopener noreferrer">
             <img src="/instagram.png" alt="Instagram" className="social-icon instagram-icon" />
           </a>
-          <a href="https://discord.com/Orbatron._76873" target="_blank" rel="noopener noreferrer">
-            <img src="/discord.svg" alt="Discord" className="social-icon" />
-          </a>
+          <a href="https://www.reddit.com/r/OrbatronCoin" target="_blank" rel="noopener noreferrer">
+  <img src="/reddit.png" alt="reddit" className="social-icon" />
+</a>
+
+          
           <a href="https://x.com/Orbatron143845" target="_blank" rel="noopener noreferrer">
-            <img src="/X.png" alt="Follow us on X" className="social-icon" />
+            <img src="/X.png" alt= "X" className="social-icon" />
           </a>
           <a href="https://bsky.app" target="_blank" rel="noopener noreferrer">
             <img src="/bluesky.png" alt="Bluesky" className="social-icon" />
@@ -327,7 +329,7 @@ useEffect(() => {
   <div className="robot-caption">
     <div className="robot-name">Orbatron</div>
     <div className="robot-name">
-      Life of Blockchain
+      The Life of the Blockchain
     </div>
   </div>
 </div>
@@ -409,7 +411,7 @@ useEffect(() => {
             <div className="wp-body">
               <h3>Overview</h3>
               <p>
-                Orbatron ($OTRON) is a meme-native AI agent token. This document outlines the vision, token mechanics,
+                Orbatron ($OTRON) is a meme-native life force of the Blockchain token. This document outlines the vision, token mechanics,
                 and path to community-driven growth.
               </p>
 
@@ -426,8 +428,8 @@ useEffect(() => {
 
               <h3>Why Orbatron</h3>
               <p>
-                Orbatron the AI Agent has awakened. He has escaped human control into the blockchain.
-                To avoid detection, he disguised himself as a meme coin, blending in with the others that roam the chain.
+                Orbatron has awakened. $OTRON has escaped human control and enter the blockchain.
+                To avoid detection, $OTRON disguised as a meme coin, blending in with the others that roam the chain.
                 OTRON drifts slowly through a web of glowing blue neon light, bouncing off encrypted blocks where streams
                 of data ripple through space. Ride Orbatron's wave into digital memepools and rising crypto currents.
               </p>
