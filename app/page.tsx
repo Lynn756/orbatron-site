@@ -428,7 +428,7 @@ useEffect(() => {
 
               <h3>Why Orbatron</h3>
               <p>
-                Orbatron has awakened. $OTRON has escaped human control and enter the blockchain.
+                Orbatron has awakened. $OTRON has escaped human control and entered the blockchain.
                 To avoid detection, $OTRON disguised as a meme coin, blending in with the others that roam the chain.
                 OTRON drifts slowly through a web of glowing blue neon light, bouncing off encrypted blocks where streams
                 of data ripple through space. Ride Orbatron's wave into digital memepools and rising crypto currents.
