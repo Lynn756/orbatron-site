@@ -1,0 +1,16 @@
+{
+  "name": "Orbatron List",
+  "logoURI": "ipfs://bafybeictksxev7ejq4reqadglxi4gohdowkho4vxrn2kvu5qpi7gn6sf5m",
+  "timestamp": "2025-10-31T00:00:00+00:00",
+  "version": { "major": 1, "minor": 0, "patch": 0 },
+  "tokens": [
+    {
+      "chainId": 8453,
+      "address": "0x259b9068fa3f1D6813bA9A8580Cda46337cBdaAd",
+      "name": "Orbatron",
+      "symbol": "OTRON",
+      "decimals": 18,
+      "logoURI": "ipfs://bafybeictksxev7ejq4reqadglxi4gohdowkho4vxrn2kvu5qpi7gn6sf5m"
+    }
+  ]
+}
