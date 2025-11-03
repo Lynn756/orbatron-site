@@ -240,7 +240,7 @@ useEffect(() => {
         </div>
 
         <div className="topbar-icons">
-          <a href="https://instagram.com/OTRONCOIN" target="_blank" rel="noopener noreferrer">
+          <a href="https://instagram.com/orbatroncoin" target="_blank" rel="noopener noreferrer">
             <img src="/instagram.png" alt="Instagram" className="social-icon instagram-icon" />
           </a>
           <a href="https://www.reddit.com/r/OrbatronCoin" target="_blank" rel="noopener noreferrer">
@@ -248,7 +248,7 @@ useEffect(() => {
          </a>
 
           
-          <a href="https://x.com/Orbatron143845" target="_blank" rel="noopener noreferrer">
+          <a href="https://x.com/Orbatroncoin" target="_blank" rel="noopener noreferrer">
             <img src="/X.png" alt= "X" className="social-icon" />
           </a>
           <a href="https://bsky.app" target="_blank" rel="noopener noreferrer">
@@ -428,7 +428,7 @@ useEffect(() => {
 
               <h3>Why Orbatron</h3>
               <p>
-                Orbatron has awakened. $OTRON has escaped human control and entered the blockchain.
+                Orbatron has awakened. $OTRON has escaped human control and entered git commit -m "updatetext in whitepaper"the blockchain.
                 To avoid detection, $OTRON disguised as a meme coin, blending in with the others that roam the chain.
                 OTRON drifts slowly through a web of glowing blue neon light, bouncing off encrypted blocks where streams
                 of data ripple through space. Ride Orbatron's wave into digital memepools and rising crypto currents.
