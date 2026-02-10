@@ -137,12 +137,12 @@ body{
   text-align:center;
   margin:8px auto 18px;      /* shows under the chip, above the main page */
   font-size:14px;
-  color:#fff;
+  color:#d69f08;
   position:relative;
   z-index:25;
 }
 .contact-email a{
-  color:#fff;
+  color:#bfe615;
   text-decoration:underline;
 }
 
