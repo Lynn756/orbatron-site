@@ -18,11 +18,9 @@ export const metadata: Metadata = {
   description:
     "The AI agent who escaped human control has entered the Blockchain City. $OTRON lives on-chain, off-grid.",
 
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 1,
-  },
+  viewport: "width=device-width, initial-scale=1",
+
+
 
   openGraph: {
     type: "website",
