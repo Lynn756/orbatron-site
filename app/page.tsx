@@ -293,6 +293,10 @@ useEffect(() => {
           )}
         </button>
       </div>
+<div className="contact-email">
+  Contact: <a href="mailto:orbatroncoin@proton.me">orbatroncoin@proton.me</a>
+</div>
+
 
       {/* PAGE */}
       <main className="page">
@@ -303,9 +307,7 @@ useEffect(() => {
             <span className="token-label">$OTRON</span>
           </div>
 
-        <div className="contact-email">
-  Contact: <a href="mailto:orbatroncoin@proton.me">orbatroncoin@proton.me</a>
-</div>
+        
 
 
   

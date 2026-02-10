@@ -1,4 +1,3 @@
-
 /* =========================
    THEME TOKENS
    ========================= */
@@ -99,9 +98,9 @@ body{
   background:linear-gradient(45deg,#131212,hwb(59 8% 11%),#80da8c,#33e706,#0a0a0a);
 }
 .topbar-icons a:has(img[alt="reddit"]){  background:#65df1e; }
-.topbar-icons a:has(img[alt="X"])       {  background:#1dc00e; }
-.topbar-icons a:has(img[alt="Bluesky"]) {  background:#22b122; }
-.topbar-icons a:has(img[alt="Telegram"]){  background:#0dda62; }
+.topbar-icons a:has(img[alt="X"])       { background:#1dc00e; }
+.topbar-icons a:has(img[alt="Bluesky"]) { background:#22b122; }
+.topbar-icons a:has(img[alt="Telegram"]){ background:#0dda62; }
 
 /* =========================
    CONTRACT CHIP
@@ -132,6 +131,22 @@ body{
 .copy-icon{ width:16px; height:16px; display:inline-block; }
 
 /* =========================
+   CONTACT EMAIL (FIXED)
+   ========================= */
+.contact-email{
+  text-align:center;
+  margin:8px auto 18px;      /* shows under the chip, above the main page */
+  font-size:14px;
+  color:#fff;
+  position:relative;
+  z-index:25;
+}
+.contact-email a{
+  color:#fff;
+  text-decoration:underline;
+}
+
+/* =========================
    PAGE LAYOUT
    ========================= */
 .page{ padding:12px 16px calc(var(--ticker-h) + 90px); }
@@ -147,7 +162,7 @@ body{
 
 /* Robot + caption (desktop) */
 .robot-stage{ display:flex; flex-direction:column; align-items:center; margin-top:24px; }
-.robot-wrapper{ margin:0; }
+.robot-wrapper{ margin:0; position:relative; display:inline-block; }
 .robot-wrapper img{
   display:block; width:min(80vw,340px); height:auto;
   filter:drop-shadow(0 6px 14px rgba(0,0,0,.25)); margin:0;
@@ -183,30 +198,77 @@ body{
   position:fixed; left:0; right:0; bottom:0; z-index:9;
   height:var(--ticker-h); background:var(--bar-bg); border-top:2px solid var(--bar-stroke); overflow:hidden;
 }
-.ticker-track{ display:inline-block; white-space:nowrap; padding-left:100%; line-height:var(--ticker-h); animation:tickerScroll var(--ticker-speed) linear infinite; }
-.ticker-item{ display:inline-block; padding:0 1.5rem; color:#fff; text-shadow:0 0 8px rgba(0,0,0,.4); font:600 14px ui-monospace, Menlo, monospace; letter-spacing:.03em; }
+.ticker-track{
+  display:inline-block;
+  white-space:nowrap;
+  padding-left:100%;
+  line-height:var(--ticker-h);
+  animation:tickerScroll var(--ticker-speed) linear infinite;
+}
+.ticker-item{
+  display:inline-block;
+  padding:0 1.5rem;
+  color:#fff;
+  text-shadow:0 0 8px rgba(0,0,0,.4);
+  font:600 14px ui-monospace, Menlo, monospace;
+  letter-spacing:.03em;
+}
 @keyframes tickerScroll{ to{ transform:translateX(-100%); } }
 @media (prefers-reduced-motion:reduce){ .ticker-track{ animation:none; } }
 
 /* =========================
    WHITEPAPER MODAL
    ========================= */
-.wp-modal{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; background:rgba(0,0,0,.6); z-index:3000; }
-.wp-card{
-  background:#fff; color:#0b0905; width:min(92vw,720px); max-height:min(86vh,900px);
-  border-radius:14px; border:2px solid var(--brand); box-shadow:0 20px 60px rgba(0,0,0,.45); overflow:auto;
+.wp-modal{
+  position:fixed; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(0,0,0,.6);
+  z-index:3000;
 }
-.wp-head{ position:sticky; top:0; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:14px 16px; background:#fff; border-bottom:1px solid rgba(0,0,0,.08); z-index:1; }
+.wp-card{
+  background:#fff; color:#0b0905;
+  width:min(92vw,720px);
+  max-height:min(86vh,900px);
+  border-radius:14px;
+  border:2px solid var(--brand);
+  box-shadow:0 20px 60px rgba(0,0,0,.45);
+  overflow:auto;
+}
+.wp-head{
+  position:sticky; top:0;
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:14px 16px;
+  background:#fff;
+  border-bottom:1px solid rgba(0,0,0,.08);
+  z-index:1;
+}
 .wp-body{ padding:16px; line-height:1.35; }
 .wp-close{ border:0; background:transparent; font-size:28px; line-height:1; cursor:pointer; }
+
 .wp-card.wp-dark{
-  background:#e01e1e; color:#f5f5f5; border:1px solid rgba(233,140,19,.55);
+  background:#e01e1e; color:#f5f5f5;
+  border:1px solid rgba(233,140,19,.55);
   box-shadow:0 22px 60px rgba(0,0,0,.45), 0 0 18px rgba(233,140,19,.35);
 }
 .wp-card.wp-dark a{ color:#ffd48a; }
 .wp-card.wp-dark .wp-head{ background:#2ac8ce; border-bottom:1px solid rgba(255,255,255,.15); }
 .wp-card.wp-dark .wp-head h2{ color:#fff; font-weight:800; }
 .wp-card.wp-dark .wp-close{ color:#fff; }
+
+/* =========================
+   EYELID
+   ========================= */
+.eyelid{
+  position:absolute;
+  left:0;
+  width:100%;
+  height:50%;
+  background:#000;
+  opacity:0;
+  pointer-events:none;
+  transition: opacity 80ms ease;
+  z-index:5;
+}
 
 /* =========================
    MOBILE ONLY
@@ -226,7 +288,7 @@ body{
 
   .topbar-icons{
     width:100%;
-    justify-content:center !important;   /* always centered on phones */
+    justify-content:center !important;
     gap:16px !important;
   }
 
@@ -237,12 +299,23 @@ body{
   .page{ padding:12px 12px calc(var(--ticker-h) + 160px); }
 
   .robot-stage{
-    position:relative; display:inline-block; padding-bottom:3.2em; margin-top:8px; line-height:0;
+    position:relative;
+    display:inline-block;
+    padding-bottom:3.2em;
+    margin-top:8px;
+    line-height:0;
   }
   .robot-wrapper img{ width:220px; height:auto; }
   .robot-caption{
-    position:absolute; left:50%; top:100%; transform:translate(-50%, -10px);
-    margin:0; text-align:center; line-height:1.05; pointer-events:none; white-space:nowrap;
+    position:absolute;
+    left:50%;
+    top:100%;
+    transform:translate(-50%, -10px);
+    margin:0;
+    text-align:center;
+    line-height:1.05;
+    pointer-events:none;
+    white-space:nowrap;
   }
   .robot-name:first-of-type{ font-size:1.15rem; font-weight:800; }
   .robot-name:first-of-type + .robot-name{ font-size:1.00rem; font-weight:700; margin-top:2px; }
@@ -251,12 +324,21 @@ body{
 
   .cta-fixed{
     bottom: calc(var(--ticker-h) + 20px);
-    width:100%; display:flex; justify-content:center; pointer-events:none;
+    width:100%;
+    display:flex;
+    justify-content:center;
+    pointer-events:none;
   }
   .cta-fixed .cta-primary{
-    pointer-events:auto; background:var(--brand); color:#0b0905;
-    font-size:1rem; font-weight:800; border-radius:14px; padding:12px 20px;
-    border:2px solid rgba(0,0,0,.15); box-shadow:0 6px 16px rgba(0,0,0,.25);
+    pointer-events:auto;
+    background:var(--brand);
+    color:#0b0905;
+    font-size:1rem;
+    font-weight:800;
+    border-radius:14px;
+    padding:12px 20px;
+    border:2px solid rgba(0,0,0,.15);
+    box-shadow:0 6px 16px rgba(0,0,0,.25);
   }
 }
 
@@ -266,61 +348,3 @@ body{
   .robot-name:first-of-type{ font-size:1.05rem; }
   .robot-name:first-of-type + .robot-name{ font-size:.95rem; }
 }
-/* === MOBILE: keep Orbatron's name under his feet (desktop unchanged) === */
-@media (max-width:700px){
-  .robot-stage{
-    position: relative;
-    display: inline-block;
-    line-height: 0;            /* kill extra line height around the image */
-    padding-bottom: 3.0em;     /* reserve space for the two caption lines */
-  }
-
-  .robot-wrapper img{
-    display:block;
-    width:220px;               /* your current mobile size */
-    height:auto;
-    margin:0 auto;
-  }
-
-  .robot-caption{
-    position: absolute;
-    left: 50%;
-    top: 100%;                 /* anchor at image bottom */
-    transform: translate(-50%, -90px); /* nudge upward toward the feet */
-    margin: 0 !important;      /* override desktop’s negative margin */
-    line-height: 1.05;
-    white-space: nowrap;
-    pointer-events: none;
-  }
-}
-.robot-wrapper {
-  position: relative;
-  display: inline-block;
-}
-
-/* eyelid base */
-.eyelid {
-  position: absolute;
-  left: 0;
-  width: 100%;
-  height: 50%;
-  background: #000;              /* eyelid color */
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 80ms ease;
-  z-index: 5;                    /* above Orbatron image */
-}
-
-.contact-email {
-  text-align: center;
-  margin-top: 12px;
-  font-size: 14px;
-  color: white;
-}
-.contact-email a {
-  color: white;
-  text-decoration: underline;
-}
-
-
-
