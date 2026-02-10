@@ -307,6 +307,7 @@ useEffect(() => {
   Contact: <a href="mailto:orbatroncoin@proton.me">orbatroncoin@proton.me</a>
 </div>
 
+
   
       <div className="robot-stage">
   <div className="robot-wrapper" style={{ position:'relative' }}>
