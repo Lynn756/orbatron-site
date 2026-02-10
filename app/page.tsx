@@ -265,9 +265,8 @@ useEffect(() => {
       </nav>
 
 
-<p style={{ textAlign: "center", marginTop: "40px", fontSize: "14px", color: "#bbb" }}>
-  Contact: <a href="mailto:Orbatroncoin@proton.me">Orbatroncoin@proton.me</a>
-</p>
+
+
 
 
 
@@ -304,7 +303,11 @@ useEffect(() => {
             <span className="token-label">$OTRON</span>
           </div>
 
-          
+        <div className="contact-email">
+  Contact: <a href="mailto:orbatroncoin@proton.me">orbatroncoin@proton.me</a>
+</div>
+
+  
       <div className="robot-stage">
   <div className="robot-wrapper" style={{ position:'relative' }}>
     {/* Base image (always visible) */}

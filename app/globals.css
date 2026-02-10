@@ -316,6 +316,24 @@ body{
 
 /* bottom eyelid covers bottom half */
 .eyelid-bottom { bottom: 0; }
+.contact-email {
+  position: fixed;
+  bottom: 18px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 999999;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 10px 14px;
+  border-radius: 12px;
+  font-size: 14px;
+  text-align: center;
+}
 
-/* when blinking */
-.eyelid.on { opacity: 1; }
+.contact-email a {
+  color: white;
+  text-decoration: underline;
+}
+
+
+
