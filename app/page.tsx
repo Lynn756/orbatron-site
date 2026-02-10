@@ -264,6 +264,14 @@ useEffect(() => {
         </div>
       </nav>
 
+
+<p style={{ textAlign: "center", marginTop: "40px", fontSize: "14px", color: "#bbb" }}>
+  Contact: <a href="mailto:Orbatroncoin@proton.me">Orbatroncoin@proton.me</a>
+</p>
+
+
+
+
       {/* CONTRACT CHIP */}
       <div className="contract-chip" role="group" aria-label="Token contract">
         <span className="chip-label">Contract</span>
