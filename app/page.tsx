@@ -51,7 +51,7 @@ export default function Page() {
         <div className="topbar-left">
           <Image
             className="logo-coin"
-            src="/Orbatron_64.png"
+            src="/orbatron_64.png"
             alt="Otron Coin"
             width={70}
             height={70}
