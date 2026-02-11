@@ -49,19 +49,21 @@ export default function Page() {
       {/* TOP BAR */}
       <nav className="topbar">
         <div className="topbar-left">
+
           <Image
             className="logo-coin"
-            src="/orbatron_64.png"
+            src="/square.png"
             alt="Otron Coin"
             width={70}
             height={70}
             priority
+            unoptimized
           />
           <span className="token-name">$OTRON</span>
         </div>
 
         <div className="topbar-center">
-          <button className="wp-btn" onClick={() => setShowWhitepaper(true)}>
+          <button className="wp-btn'' onClick={() => setShowWhitepaper(true)}>
             Whitepaper
           </button>
         </div>
