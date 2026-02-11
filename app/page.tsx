@@ -177,7 +177,7 @@ export default function Page() {
             <div className="robot-stage" style={{ marginTop: 0 }}>
               <div className="robot-wrapper" style={{ position: 'relative' }}>
                 <Image
-                  src="/orbatron-new.png"
+                  src="/Orbatron-new.png"
                   alt="Orbatron"
                   width={420}
                   height={420}
