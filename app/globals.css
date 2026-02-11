@@ -1,3 +1,4 @@
+
 /* =========================
    THEME TOKENS
    ========================= */
@@ -107,7 +108,7 @@ body{
    ========================= */
 .contract-chip{
   position:relative; z-index:19;
-  margin:10px auto 28px;                    /* spacing so robot isn't cramped */
+  margin:10px auto 14px;
   display:grid; grid-auto-flow:column; align-items:center; gap:10px;
   width:max-content; max-width:92vw;
   padding:8px 12px; border-radius:999px;
@@ -131,18 +132,18 @@ body{
 .copy-icon{ width:16px; height:16px; display:inline-block; }
 
 /* =========================
-   CONTACT EMAIL (FIXED)
+   CONTACT EMAIL
    ========================= */
 .contact-email{
   text-align:center;
-  margin:8px auto 18px;      /* shows under the chip, above the main page */
-  font-size:14px;
-  color:#d69f08;
+  margin:8px auto 18px;
+  font-size:20px;
+  color:#110706;
   position:relative;
   z-index:25;
 }
 .contact-email a{
-  color:#bfe615;
+  color:#1a1513;
   text-decoration:underline;
 }
 
@@ -152,7 +153,7 @@ body{
 .page{ padding:12px 16px calc(var(--ticker-h) + 90px); }
 .content{ position:relative; max-width:1000px; margin:0 auto; text-align:center; }
 
-/* Coin badge (cyan page) */
+/* Coin badge (top-right) */
 .blue-coin-topright{
   position:absolute; top:10px; right:16px;
   display:flex; flex-direction:column; align-items:center; z-index:6;
@@ -160,30 +161,45 @@ body{
 .blue-coin-topright img{ width:140px; height:140px; }
 .blue-coin-topright .token-label{ margin-top:4px; font-weight:800; font-size:.95rem; color:#0e0d01; }
 
-/* Robot + caption (desktop) */
-.robot-stage{ display:flex; flex-direction:column; align-items:center; margin-top:24px; }
-.robot-wrapper{ margin:0; position:relative; display:inline-block; }
-.robot-wrapper img{
-  display:block; width:min(80vw,340px); height:auto;
-  filter:drop-shadow(0 6px 14px rgba(0,0,0,.25)); margin:0;
+/* Main stage */
+.robot-stage{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  margin-top:18px;
 }
-.robot-caption{ margin-top:-60px; text-align:center; line-height:1.15; }
+
+.robot-wrapper{
+  margin:0;
+  position:relative;
+  display:inline-block;
+}
+
+/* Keep images from blowing up; centers them */
+.robot-wrapper img{
+  display:block;
+  width:min(88vw, 520px);
+  height:auto;
+  margin:0 auto;
+}
+
+/* Title below image (NO overlap) */
+.robot-caption{
+  margin-top:18px;
+  text-align:center;
+  line-height:1.15;
+}
 .robot-name{ margin:0; line-height:1.2; }
 .robot-name:first-of-type{ font-weight:800; font-size:2rem; }
-.robot-name:first-of-type + .robot-name{ font-weight:700; font-size:1.75rem; margin-top:-5px; }
+.robot-name:first-of-type + .robot-name{ font-weight:700; font-size:1.75rem; margin-top:-2px; }
 
-/* Transmission */
-.transmission{ max-width:900px; margin:30px auto 0; padding:0 8px; overflow:visible; }
-.intro-static{ font-size:1.6rem; margin:0 0 20px; text-shadow:0 0 8px var(--brand); }
-.tw{ font-size:1.35rem; line-height:1.45; white-space:pre-wrap; word-break:break-word; display:block; }
-.end{ font-size:1.4rem; margin-top:28px; }
-
-/* CTA / Buy dot */
+/* Orange uni dot */
 .uniswap-dot{
   width:40px; height:40px; border-radius:50%; background:var(--brand);
-  display:flex; align-items:center; justify-content:center; margin:12px auto 8px;
+  display:flex; align-items:center; justify-content:center; margin:18px auto 10px;
 }
 .uniswap-dot img{ width:24px; height:24px; }
+
 .cta{ display:inline-block; padding:10px 14px; border-radius:10px; font-weight:800; text-decoration:none; }
 .cta-primary{ background:var(--brand); color:#0b0905; }
 .cta-fixed{
@@ -256,22 +272,7 @@ body{
 .wp-card.wp-dark .wp-close{ color:#fff; }
 
 /* =========================
-   EYELID
-   ========================= */
-.eyelid{
-  position:absolute;
-  left:0;
-  width:100%;
-  height:50%;
-  background:#000;
-  opacity:0;
-  pointer-events:none;
-  transition: opacity 80ms ease;
-  z-index:5;
-}
-
-/* =========================
-   MOBILE ONLY
+   MOBILE
    ========================= */
 @media (max-width:700px){
   .topbar{
@@ -298,29 +299,15 @@ body{
 
   .page{ padding:12px 12px calc(var(--ticker-h) + 160px); }
 
-  .robot-stage{
-    position:relative;
-    display:inline-block;
-    padding-bottom:3.2em;
-    margin-top:8px;
-    line-height:0;
+  /* tighter but still readable */
+  .robot-wrapper img{
+    width:min(92vw, 520px);
+    height:auto;
   }
-  .robot-wrapper img{ width:220px; height:auto; }
-  .robot-caption{
-    position:absolute;
-    left:50%;
-    top:100%;
-    transform:translate(-50%, -10px);
-    margin:0;
-    text-align:center;
-    line-height:1.05;
-    pointer-events:none;
-    white-space:nowrap;
-  }
-  .robot-name:first-of-type{ font-size:1.15rem; font-weight:800; }
-  .robot-name:first-of-type + .robot-name{ font-size:1.00rem; font-weight:700; margin-top:2px; }
 
-  .intro-static,.end{ font-size:1rem; }
+  .robot-caption{ margin-top:16px; }
+  .robot-name:first-of-type{ font-size:1.25rem; font-weight:800; }
+  .robot-name:first-of-type + .robot-name{ font-size:1.05rem; font-weight:700; margin-top:2px; }
 
   .cta-fixed{
     bottom: calc(var(--ticker-h) + 20px);
@@ -343,8 +330,7 @@ body{
 }
 
 @media (max-width:380px){
-  .robot-wrapper img{ width:200px; }
-  .robot-caption{ transform:translate(-50%,-8px); }
-  .robot-name:first-of-type{ font-size:1.05rem; }
-  .robot-name:first-of-type + .robot-name{ font-size:.95rem; }
+  .robot-name:first-of-type{ font-size:1.15rem; }
+  .robot-name:first-of-type + .robot-name{ font-size:1.00rem; }
 }
+
