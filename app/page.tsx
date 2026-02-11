@@ -177,10 +177,10 @@ export default function Page() {
             <div className="robot-stage" style={{ marginTop: 0 }}>
               <div className="robot-wrapper" style={{ position: 'relative' }}>
                 <Image
-                  src="/Orbatron-new.png"
-                  alt="Orbatron"
-                  width={420}
-                  height={420}
+                  src="/new.png"
+                  alt="new"
+                  width={300}
+                  height={300}
                   unoptimized
                   style={{ display: 'block' }}
                 />
