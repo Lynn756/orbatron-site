@@ -37,9 +37,7 @@ export default function Page() {
   };
 
   const shortAddr =
-    OTRON_CONTRACT &&
-    OTRON_CONTRACT.startsWith('0x') &&
-    OTRON_CONTRACT.length > 12
+    OTRON_CONTRACT && OTRON_CONTRACT.startsWith('0x') && OTRON_CONTRACT.length > 12
       ? `${OTRON_CONTRACT.slice(0, 10)}…${OTRON_CONTRACT.slice(-6)}`
       : OTRON_CONTRACT;
 
@@ -51,7 +49,6 @@ export default function Page() {
       {/* TOP BAR */}
       <nav className="topbar">
         <div className="topbar-left">
-
           <Image
             className="logo-coin"
             src="/square.png"
@@ -59,16 +56,12 @@ export default function Page() {
             width={70}
             height={70}
             priority
-            unoptimized
           />
           <span className="token-name">$OTRON</span>
         </div>
 
         <div className="topbar-center">
-          <button
-            className="wp-btn"
-            onClick={() => setShowWhitepaper(true)}
-          >
+          <button className="wp-btn" onClick={() => setShowWhitepaper(true)}>
             Whitepaper
           </button>
         </div>
@@ -78,59 +71,23 @@ export default function Page() {
         </div>
 
         <div className="topbar-icons">
-          <a
-            href="https://instagram.com/orbatroncoin"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src="/instagram.png"
-              alt="Instagram"
-              className="social-icon instagram-icon"
-            />
+          <a href="https://instagram.com/orbatroncoin" target="_blank" rel="noopener noreferrer">
+            <img src="/instagram.png" alt="Instagram" className="social-icon instagram-icon" />
           </a>
 
-          <a
-            href="https://www.reddit.com/r/OrbatronCoin"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src="/reddit.png"
-              alt="reddit"
-              className="social-icon"
-            />
+          <a href="https://www.reddit.com/r/OrbatronCoin" target="_blank" rel="noopener noreferrer">
+            <img src="/reddit.png" alt="reddit" className="social-icon" />
           </a>
 
-          <a
-            href="https://x.com/Orbatroncoin"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src="/X.png"
-              alt="X"
-              className="social-icon"
-            />
+          <a href="https://x.com/Orbatroncoin" target="_blank" rel="noopener noreferrer">
+            <img src="/X.png" alt="X" className="social-icon" />
           </a>
 
-          <a
-            href="https://bsky.app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img
-              src="/bluesky.png"
-              alt="Bluesky"
-              className="social-icon"
-            />
+          <a href="https://bsky.app" target="_blank" rel="noopener noreferrer">
+            <img src="/bluesky.png" alt="Bluesky" className="social-icon" />
           </a>
 
-          <a
-            href="https://t.me/Orbatronofficial"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href="https://t.me/Orbatronofficial" target="_blank" rel="noopener noreferrer">
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg"
               alt="Telegram"
@@ -159,13 +116,7 @@ export default function Page() {
             'Copied!'
           ) : (
             <>
-              <svg
-                className="copy-icon"
-                viewBox="0 0 24 24"
-                width="16"
-                height="16"
-                aria-hidden="true"
-              >
+              <svg className="copy-icon" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
                 <path
                   d="M16 1H4a2 2 0 0 0-2 2v12h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"
                   fill="currentColor"
@@ -179,16 +130,13 @@ export default function Page() {
 
       {/* EMAIL */}
       <div className="contact-email">
-        Contact:{' '}
-        <a href="mailto:orbatroncoin@proton.me">
-          orbatroncoin@proton.me
-        </a>
+        Contact: <a href="mailto:orbatroncoin@proton.me">orbatroncoin@proton.me</a>
       </div>
 
-      {/* PAGE CONTENT */}
+      {/* PAGE */}
       <main className="page">
         <div className="content">
-          {/* GRID OF IMAGES */}
+          {/* 3-UP ROW: LEFT = COOK(+BLISTER), CENTER = MAIN, RIGHT = FIRE(+CANYON) */}
           <div
             style={{
               width: '100%',
@@ -201,13 +149,7 @@ export default function Page() {
             }}
           >
             {/* LEFT COLUMN */}
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-              }}
-            >
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <Image
                 src="/Cook.PNG"
                 alt="Kiss the Cook"
@@ -217,6 +159,7 @@ export default function Page() {
                 style={{ borderRadius: 8 }}
               />
 
+              {/* LEFT — second pic under Kiss the Cook */}
               <div style={{ textAlign: 'center', marginTop: 18 }}>
                 <Image
                   src="/Blister.PNG"
@@ -232,51 +175,35 @@ export default function Page() {
 
             {/* CENTER COLUMN */}
             <div className="robot-stage" style={{ marginTop: 0 }}>
-              <div
-                className="robot-wrapper"
-                style={{ position: 'relative' }}
-              >
+              <div className="robot-wrapper" style={{ position: 'relative' }}>
                 <Image
                   src="/new.png"
-                  alt="new"
-                  width={300}
-                  height={300}
+                  alt="Orbatron"
+                  width={420}
+                  height={420}
                   unoptimized
                   style={{ display: 'block' }}
                 />
               </div>
 
-              <div
-                className="robot-caption"
-                style={{ marginTop: 12 }}
-              >
+              <div className="robot-caption" style={{ marginTop: 12 }}>
                 <div className="robot-name">Orbatron</div>
-                <div className="robot-name">
-                  A SIGNAL FROM BASEION
-                </div>
+                <div className="robot-name">A SIGNAL FROM BASEION</div>
               </div>
             </div>
 
             {/* RIGHT COLUMN */}
-            <div
-              style={{
-                display: 'flex',
-                flexDirection: 'column',
-                alignItems: 'center',
-              }}
-            >
+            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <Image
                 src="/Fire.PNG"
                 alt="Fire"
                 width={220}
                 height={220}
                 unoptimized
-                style={{
-                  borderRadius: 8,
-                  opacity: 0.85,
-                }}
+                style={{ borderRadius: 8, opacity: 0.85 }}
               />
 
+              {/* RIGHT — second pic under Fire */}
               <div style={{ textAlign: 'center', marginTop: 18 }}>
                 <Image
                   src="/Canyon.JPG"
@@ -291,7 +218,7 @@ export default function Page() {
             </div>
           </div>
 
-          {/* ORANGE UNISWAP DOT */}
+          {/* Orange uni dot */}
           {UNI_BUY ? (
             <a
               className="uniswap-dot"
@@ -300,35 +227,20 @@ export default function Page() {
               rel="noopener noreferrer"
               title="Buy $OTRON on Uniswap"
             >
-              <Image
-                src="/unicorn-logo.png"
-                alt="Uniswap"
-                width={28}
-                height={28}
-              />
+              <Image src="/unicorn-logo.png" alt="Uniswap" width={28} height={28} />
             </a>
           ) : (
             <div className="uniswap-dot" title="Buy opens at launch">
-              <Image
-                src="/unicorn-logo.png"
-                alt="Uniswap"
-                width={28}
-                height={28}
-              />
+              <Image src="/unicorn-logo.png" alt="Uniswap" width={28} height={28} />
             </div>
           )}
         </div>
       </main>
 
-      {/* FIXED BUY BUTTON */}
+      {/* Fixed BUY above ticker */}
       <div className="cta-fixed">
         {UNI_BUY ? (
-          <a
-            className="cta cta-primary"
-            href={UNI_BUY}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a className="cta cta-primary" href={UNI_BUY} target="_blank" rel="noopener noreferrer">
             Buy $OTRON on Uniswap
           </a>
         ) : (
@@ -347,19 +259,12 @@ export default function Page() {
           aria-labelledby="wp-title"
           onClick={() => setShowWhitepaper(false)}
         >
-          <div
-            className="wp-card wp-dark"
-            onClick={(e) => e.stopPropagation()}
-          >
+          <div className="wp-card wp-dark" onClick={(e) => e.stopPropagation()}>
             <div className="wp-head">
               <h2 id="wp-title" className="wp-title">
                 $OTRON Whitepaper
               </h2>
-              <button
-                className="wp-close"
-                aria-label="Close"
-                onClick={() => setShowWhitepaper(false)}
-              >
+              <button className="wp-close" aria-label="Close" onClick={() => setShowWhitepaper(false)}>
                 ×
               </button>
             </div>
@@ -367,9 +272,8 @@ export default function Page() {
             <div className="wp-body">
               <h3>Overview</h3>
               <p>
-                Orbatron ($OTRON) is a meme-native life force of the
-                Blockchain token. This document outlines the vision,
-                token mechanics, and path to community-driven growth.
+                Orbatron ($OTRON) is a meme-native life force of the Blockchain token. This document outlines the
+                vision, token mechanics, and path to community-driven growth.
               </p>
 
               <h3>Tokenomics</h3>
@@ -385,10 +289,8 @@ export default function Page() {
 
               <h3>Why Orbatron</h3>
               <p>
-                Orbatron has awakened. $OTRON has escaped human control
-                and entered the blockchain. To avoid detection, $OTRON
-                disguised as a meme coin, blending in with the others
-                that roam the chain.
+                Orbatron has awakened. $OTRON has escaped human control and entered the blockchain. To avoid detection,
+                $OTRON disguised as a meme coin, blending in with the others that roam the chain.
               </p>
             </div>
           </div>
