@@ -269,32 +269,40 @@ body{
 /* =========================
    MOBILE
    ========================= */
+
+
 @media (max-width:700px){
   .topbar{
     padding:8px 12px;
-    grid-template-columns:1fr auto;
+
+    /* THIS is the missing piece */
+    display:grid;
+
+    grid-template-columns: 1fr auto;
     grid-template-areas:
       "left right"
       "center center"
       "icons icons";
+    row-gap:10px;
   }
+
+  .topbar-left{ grid-area:left; }
+  .topbar-right{ grid-area:right; }
+  .topbar-center{ grid-area:center; }
+  .topbar-icons{ grid-area:icons; }
+
   .logo-coin{ width:28px; height:28px; }
   .token-name{ font-size:1.35rem; }
   .network{ font-size:13px; }
 
   .topbar-icons{
     width:100%;
-    justify-content:center !important;
-    gap:16px !important;
+    justify-content:center;
+    gap:16px;
   }
-
-  .blue-coin-topright{ top:6px; right:10px; }
-  .blue-coin-topright img{ width:48px; height:48px; }
-  .blue-coin-topright .token-label{ font-size:.85rem; }
 
   .page{ padding:12px 12px calc(var(--ticker-h) + 160px); }
 
-  /* tighter but still readable */
   .robot-wrapper img{
     width:min(92vw, 520px);
     height:auto;
@@ -323,9 +331,3 @@ body{
     box-shadow:0 6px 16px rgba(0,0,0,.25);
   }
 }
-
-@media (max-width:380px){
-  .robot-name:first-of-type{ font-size:1.15rem; }
-  .robot-name:first-of-type + .robot-name{ font-size:1.00rem; }
-}
-
