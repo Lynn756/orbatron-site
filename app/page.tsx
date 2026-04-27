@@ -151,8 +151,8 @@ export default function Page() {
             {/* LEFT COLUMN */}
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <Image
-                src="/Cook.PNG"
-                alt="Kiss the Cook"
+                src="/Picnic.PNG"
+                alt=""
                 width={220}
                 height={220}
                 unoptimized
@@ -162,14 +162,14 @@ export default function Page() {
               {/* LEFT — second pic under Kiss the Cook */}
               <div style={{ textAlign: 'center', marginTop: 18 }}>
                 <Image
-                  src="/Blister.PNG"
-                  alt="Blister"
+                  src="/My name is Moon.PNG"
+                  alt="Moon"
                   width={220}
                   height={220}
                   unoptimized
                   style={{ borderRadius: 8 }}
                 />
-                <div className="pic-title">Blister</div>
+                <div className="pic-title">Moon</div>
               </div>
             </div>
 
@@ -177,7 +177,7 @@ export default function Page() {
             <div className="robot-stage" style={{ marginTop: 0 }}>
               <div className="robot-wrapper" style={{ position: 'relative' }}>
                 <Image
-                  src="/new.png"
+                  src="/IMG_7884.jpg"
                   alt="Orbatron"
                   width={420}
                   height={420}
@@ -189,13 +189,53 @@ export default function Page() {
               <div className="robot-caption" style={{ marginTop: 12 }}>
                 <div className="robot-name">Orbatron</div>
                 <div className="robot-name">A SIGNAL FROM BASEION</div>
+            <div style={{ 
+  marginTop: '20px', 
+  padding: '15px', 
+  background: 'rgba(125, 25, 219, 0.57)', 
+  borderRadius: '12px', 
+  border: '1px solid rgba(243, 34, 19, 0.94)',
+  boxShadow: '0 0 15px rgba(16, 94, 212, 0.5)' 
+}}>
+  <div style={{ 
+    color: '#FFD700', 
+    fontSize: '14px', 
+    fontWeight: '900', 
+    letterSpacing: '2px', 
+    marginBottom: '10px',
+    textShadow: '0 0 8px rgba(255, 215, 0, 0.6)'
+  }}>
+    SUPPORTED WALLETS
+  </div>
+  <div style={{ 
+    display: 'flex', 
+    justifyContent: 'center', 
+    gap: '15px', 
+    fontSize: '16px', 
+    color: '#fff', 
+    fontWeight: 'bold', 
+    flexWrap: 'wrap',
+    alignItems: 'center'
+  }}>
+    <span style={{ background: '#2b2b2b', padding: '4px 10px', borderRadius: '6px' }}>Coinbase App</span>
+    <span style={{ background: '#2b2b2b', padding: '4px 10px', borderRadius: '6px' }}>MetaMask</span>
+    <span style={{ background: '#2b2b2b', padding: '4px 10px', borderRadius: '6px' }}>Rainbow</span>
+    <span style={{ color: '#FFD700' }}>•</span>
+    <span style={{ background: '#2b2b2b', padding: '4px 10px', borderRadius: '6px' }}>OKX</span>
+    <span style={{ background: '#2b2b2b', padding: '4px 10px', borderRadius: '6px' }}>Phantom</span>
+    <span style={{ background: '#2b2b2b', padding: '4px 10px', borderRadius: '6px' }}>Trust</span>
+    <span style={{ color: '#FFD700' }}>•</span>
+    <span style={{ background: '#2b2b2b', padding: '4px 10px', borderRadius: '6px' }}>Dexscreener</span>
+  </div>
+</div>
               </div>
             </div>
 
+  
             {/* RIGHT COLUMN */}
             <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
               <Image
-                src="/Fire.PNG"
+                src="/Museum.png"
                 alt="Fire"
                 width={220}
                 height={220}
@@ -206,14 +246,14 @@ export default function Page() {
               {/* RIGHT — second pic under Fire */}
               <div style={{ textAlign: 'center', marginTop: 18 }}>
                 <Image
-                  src="/Canyon.JPG"
+                  src="/IMG_9357.JPG"
                   alt="Canyon"
                   width={220}
                   height={220}
                   unoptimized
                   style={{ borderRadius: 8 }}
                 />
-                <div className="pic-title">Canyon</div>
+                <div className="pic-title">Crystal Key</div>
               </div>
             </div>
           </div>
