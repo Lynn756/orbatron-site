@@ -213,7 +213,7 @@ export default function Page() {
             <div style={{ 
   marginTop: '20px', 
   padding: '15px', 
-  background: 'git add.rgba(125, 25, 219, 0.57)', 
+  background: 'rgba(125, 25, 219, 0.57)', 
   borderRadius: '12px', 
   border: '1px solid rgba(243, 34, 19, 0.94)',
   boxShadow: '0 0 15px rgba(16, 94, 212, 0.5)' 
