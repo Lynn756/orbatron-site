@@ -170,29 +170,34 @@ export default function Page() {
                   style={{ borderRadius: 8 }}
                 />
                 <div className="pic-title">Moon</div>
-              <a
-  href="https://go.cb-w.com/dapp?cb_url=https%3A%2F%2Fwww.coinbase.com%2Fdex%2Fswap%3FinputCurrency%3DUSDC%26network%3Dbase%26outputCurrency%3D0x259b9b68516016335198B7C5696d595822367507"
-  target="_blank"
-  rel="noopener noreferrer"
-  style={{
-    display: 'inline-block',
-    marginTop: '10px',
-    padding: '10px 20px',
-    backgroundColor: '#0052ff',
-    color: '#fff',
-    borderRadius: '20px',
-    textDecoration: 'none',
-    fontWeight: 'bold',
-    fontSize: '14px',
-    textAlign: 'center'
-  }}
->
-  Open in Coinbase App
-</a>
-  
-  
-  
-              </div>
+            
+<div style={{ textAlign: 'center', margin: '20px 0' }}>
+  <a href="https://www.coinbase.com/price/orbatron"
+     target="_blank"
+     style={{
+       backgroundColor: '#0052FF',
+       color: '#FFFFFF',
+       padding: '18px 35px',
+       textDecoration: 'none',
+       borderRadius: '10px',
+       fontWeight: '800',
+       fontSize: '18px',
+       display: 'inline-block',
+       fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+       boxShadow: '0px 4px 15px rgba(0, 82, 255, 0.3)',
+       transition: 'transform 0.2s ease',
+        border: '2px solid #FFFFFF',
+      }}
+     onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+     onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+  >
+    BUY $OTRON ON COINBASE
+  </a>
+</div>
+
+
+
+   </div>
             </div>
 
             {/* CENTER COLUMN */}
@@ -269,7 +274,7 @@ export default function Page() {
               <div style={{ textAlign: 'center', marginTop: 18 }}>
                 <Image
                   src="/IMG_9357.JPG"
-                  alt="Canyon"
+                  alt="Crystal Key"
                   width={220}
                   height={220}
                   unoptimized
@@ -277,7 +282,31 @@ export default function Page() {
                 />
                 <div className="pic-title">Crystal Key</div>
               </div>
+           <div style={{ textAlign: 'center', marginTop: '20px' }}>
+  <a href="https://www.okx.com/web3/dex-swap?outputCurrency=0x259b90689b068772a5a07c132c3f84725ccBdaAd&chain=base"
+     target="_blank"
+     style={{
+       backgroundColor: '#d81778',
+       color: '#FFFFFF',
+       padding: '18px 35px',
+       textDecoration: 'none',
+       borderRadius: '10px',
+       fontWeight: '800',
+       fontSize: '18px',
+       display: 'inline-block',
+       fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+       border: '2px solid #FFFFFF'
+     }}
+     onMouseOver={(e) => e.currentTarget.style.transform = 'scale(1.05)'}
+     onMouseOut={(e) => e.currentTarget.style.transform = 'scale(1)'}
+  >
+    BUY $OTRON ON OKX
+  </a>
+</div>
             </div>
+          
+
+  
           </div>
 
           {/* Orange uni dot */}
