@@ -159,7 +159,7 @@ export default function Page() {
                 style={{ borderRadius: 8 }}
               />
 
-              {/* LEFT — second pic under Kiss the Cook */}
+              {/* LEFT — second pic under picnic */}
               <div style={{ textAlign: 'center', marginTop: 18 }}>
                 <Image
                   src="/My name is Moon.PNG"
@@ -170,6 +170,27 @@ export default function Page() {
                   style={{ borderRadius: 8 }}
                 />
                 <div className="pic-title">Moon</div>
+              <a 
+  href="https://coinbase.com/dex/swap?inputCurrency=USDC&network=base&outputCurrency=0x259b9b68516016335198B750eE644D2547cBdaAd" 
+  target="_blank" 
+  rel="noopener noreferrer"
+  style={{
+    display: 'inline-block',
+    marginTop: '10px',
+    padding: '10px 20px',
+    backgroundColor: '#0052ff', 
+    color: '#fff',
+    borderRadius: '20px',
+    textDecoration: 'none',
+    fontWeight: 'bold',
+    fontSize: '14px',
+    textAlign: 'center'
+  }}
+>
+  Buy on Coinbase App
+</a>
+  
+  
               </div>
             </div>
 
@@ -192,7 +213,7 @@ export default function Page() {
             <div style={{ 
   marginTop: '20px', 
   padding: '15px', 
-  background: 'rgba(125, 25, 219, 0.57)', 
+  background: 'git add.rgba(125, 25, 219, 0.57)', 
   borderRadius: '12px', 
   border: '1px solid rgba(243, 34, 19, 0.94)',
   boxShadow: '0 0 15px rgba(16, 94, 212, 0.5)' 
