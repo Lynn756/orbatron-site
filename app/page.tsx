@@ -170,15 +170,15 @@ export default function Page() {
                   style={{ borderRadius: 8 }}
                 />
                 <div className="pic-title">Moon</div>
-              <a 
-  href="https://coinbase.com/dex/swap?inputCurrency=USDC&network=base&outputCurrency=0x259b9b68516016335198B750eE644D2547cBdaAd" 
-  target="_blank" 
+              <a
+  href="https://go.cb-w.com/dapp?cb_url=https%3A%2F%2Fwww.coinbase.com%2Fdex%2Fswap%3FinputCurrency%3DUSDC%26network%3Dbase%26outputCurrency%3D0x259b9b68516016335198B7C5696d595822367507"
+  target="_blank"
   rel="noopener noreferrer"
   style={{
     display: 'inline-block',
     marginTop: '10px',
     padding: '10px 20px',
-    backgroundColor: '#0052ff', 
+    backgroundColor: '#0052ff',
     color: '#fff',
     borderRadius: '20px',
     textDecoration: 'none',
@@ -187,8 +187,9 @@ export default function Page() {
     textAlign: 'center'
   }}
 >
-  Buy on Coinbase App
+  Open in Coinbase App
 </a>
+  
   
   
               </div>
